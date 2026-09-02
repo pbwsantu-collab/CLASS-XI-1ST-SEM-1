@@ -1,1000 +1,591 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Class XI English • Model Sets 1-5</title>
-<style>
-  :root {
-    --primary: #4f46e5;
-    --primary-dark: #3730a3;
-    --bg: #f8fafc;
-    --card: #ffffff;
-    --text: #1e293b;
-    --muted: #64748b;
-    --border: #e2e8f0;
-    --success: #10b981;
-    --danger: #ef4444;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-  }
-  .header {
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    color: white;
-    padding: 1.5rem 1rem;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 4px 20px rgba(79,70,229,0.3);
-  }
-  .header h1 { font-size: 1.6rem; font-weight: 700; }
-  .header p { opacity: 0.9; font-size: 0.95rem; margin-top: 0.3rem; }
-
-  .menu {
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    padding: 1rem;
-    background: white;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 90px;
-    z-index: 90;
-  }
-  .menu button {
-    background: #f1f5f9;
-    border: none;
-    padding: 0.55rem 1.1rem;
-    border-radius: 999px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s;
-    color: var(--text);
-  }
-  .menu button:hover { background: #e0e7ff; color: var(--primary); }
-  .menu button.active {
-    background: var(--primary);
-    color: white;
-    box-shadow: 0 4px 12px rgba(79,70,229,0.4);
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 1.5rem 1rem 4rem;
-  }
-  .set { display: none; animation: fadeIn 0.4s ease; }
-  .set.active { display: block; }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .set-header {
-    background: white;
-    border-radius: 16px;
-    padding: 1.4rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border-left: 6px solid var(--primary);
-  }
-  .set-header h2 { color: var(--primary-dark); font-size: 1.5rem; }
-  .meta { color: var(--muted); font-size: 0.95rem; margin-top: 0.4rem; }
-
-  .unit {
-    background: white;
-    border-radius: 16px;
-    padding: 1.4rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  }
-  .unit h3 {
-    color: var(--primary);
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e0e7ff;
-    font-size: 1.25rem;
-  }
-  .texts { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.2rem; }
-
-  .q {
-    background: #f8fafc;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.1rem;
-    margin-bottom: 1rem;
-    transition: all 0.2s;
-  }
-  .q:hover { border-color: #a5b4fc; box-shadow: 0 4px 12px rgba(79,70,229,0.08); }
-  .q-num {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 28px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-right: 0.6rem;
-  }
-  .q-text { font-weight: 500; margin-bottom: 0.8rem; }
-  .options { display: grid; gap: 0.45rem; }
-  .opt {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.55rem 0.9rem;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-  .opt span {
-    background: #e0e7ff;
-    color: var(--primary-dark);
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .case {
-    background: #eef2ff;
-    border-left: 4px solid var(--primary);
-    padding: 0.8rem 1rem;
-    border-radius: 0 8px 8px 0;
-    margin-bottom: 0.8rem;
-    font-size: 0.95rem;
-  }
-  .table-wrap { overflow-x: auto; margin: 0.8rem 0; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-  th, td {
-    border: 1px solid var(--border);
-    padding: 0.5rem 0.7rem;
-    text-align: left;
-  }
-  th { background: #e0e7ff; color: var(--primary-dark); }
-  .passage {
-    background: #f1f5f9;
-    border-radius: 10px;
-    padding: 1.1rem;
-    margin-bottom: 1.2rem;
-    font-size: 0.95rem;
-    line-height: 1.7;
-  }
-  .footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📝 HS Grammar · 4 Model Sets (160 MCQs)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+    body {
+      background: #f0f4fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 18px;
+    }
+    .app {
+      max-width: 1400px;
+      width: 100%;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 20px 35px rgba(0, 20, 50, 0.15);
+      overflow: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, #1a2f5a, #2a4a7f);
+      color: white;
+      padding: 18px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.7rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .menu-badge {
+      background: #ffc857;
+      color: #1a2f5a;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .main-container {
+      padding: 28px 32px;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .menu-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px 20px;
+      border: 2px solid #e3eaf3;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.03);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .menu-card:hover {
+      border-color: #2a4a7f;
+      background: #f6faff;
+      transform: translateY(-3px);
+    }
+    .menu-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #1a2f5a;
+    }
+    .menu-card p {
+      font-size: 0.95rem;
+      color: #4a5f7a;
+    }
+    .quiz-area {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #dce5f0;
+      overflow: hidden;
+    }
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      background: #f9fbfe;
+      border-bottom: 1px solid #dde5f0;
+    }
+    .quiz-title {
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: #1a2f5a;
+    }
+    .exit-btn {
+      background: transparent;
+      border: 2px solid #1a2f5a;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .exit-btn:hover {
+      background: #1a2f5a;
+      color: white;
+    }
+    .question-block {
+      padding: 20px 28px;
+      border-bottom: 1px solid #eef2f7;
+    }
+    .q-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #12213c;
+      margin-bottom: 18px;
+      border-left: 5px solid #2a4a7f;
+      padding-left: 16px;
+      background: #fafcff;
+      border-radius: 0 12px 12px 0;
+      line-height: 1.7;
+    }
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option-item {
+      background: #ffffff;
+      border: 1.5px solid #ccd9ea;
+      border-radius: 18px;
+      padding: 12px 18px;
+      cursor: pointer;
+      transition: 0.12s ease;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      color: #1b2b4a;
+    }
+    .option-item.selected {
+      background: #e3f0ff;
+      border-color: #1a4f9c;
+      font-weight: 600;
+    }
+    .option-item.disabled {
+      pointer-events: none;
+      opacity: 0.9;
+    }
+    .option-prefix {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #eef3fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      color: #1a2f5a;
+    }
+    .answer-display {
+      margin-top: 12px;
+      display: none;
+      background: #fff7e0;
+      border-radius: 14px;
+      padding: 14px 20px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+    .feedback {
+      margin-top: 26px;
+      background: #f2f7ff;
+      padding: 18px 22px;
+      border-radius: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 8px solid #1a4f9c;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .mark-info {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a2f5a;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 60px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      background: white;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.03);
+      border: 1px solid #b9c8de;
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: #1a2f5a;
+      color: white;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #0f1e3c;
+    }
+    .btn-outline {
+      background: white;
+      color: #1a2f5a;
+    }
+    .btn-outline:hover {
+      background: #eaeffa;
+    }
+    .footer-note {
+      text-align: center;
+      padding: 14px;
+      font-size: 0.85rem;
+      color: #7b8fa9;
+    }
+  </style>
 </head>
 <body>
-  <div class="header">
-    <h1>📚 Class XI English • Model Sets 1–5</h1>
-    <p>HS Grammar Question Bunch • Full Marks : 40 each</p>
+<div class="app">
+  <header>
+    <h1>📚 HS GRAMMAR QUESTION BUNCH</h1>
+    <span class="menu-badge">4 Sets · 160 MCQs</span>
+  </header>
+  <div class="main-container" id="mainMenu">
+    <h2 style="margin-bottom:24px; color:#1a2f5a;">📖 Choose a Model Set</h2>
+    <div class="menu-grid">
+      <div class="menu-card" data-set="1">
+        <h3>📘 Model Set 1</h3>
+        <p>Prose · Verse · Rapid Reader · Grammar · Comprehension</p>
+        <p style="font-size:0.85rem; color:#335;">40 questions</p>
+      </div>
+      <div class="menu-card" data-set="2">
+        <h3>📗 Model Set 2</h3>
+        <p>Prose · Verse · Rapid Reader · Grammar · Comprehension</p>
+        <p style="font-size:0.85rem; color:#335;">40 questions</p>
+      </div>
+      <div class="menu-card" data-set="3">
+        <h3>📙 Model Set 3</h3>
+        <p>Prose · Verse · Rapid Reader · Grammar · Comprehension</p>
+        <p style="font-size:0.85rem; color:#335;">40 questions</p>
+      </div>
+      <div class="menu-card" data-set="4">
+        <h3>📕 Model Set 4</h3>
+        <p>Prose · Verse · Rapid Reader · Grammar · Comprehension</p>
+        <p style="font-size:0.85rem; color:#335;">40 questions</p>
+      </div>
+    </div>
+    <div style="background:#f7fafe; border-radius:20px; padding:20px;">
+      <p style="font-weight:500;">💡 Click any set to begin. Each MCQ has options A–D. Select an answer, then press <b>"Check & Marks"</b>. After submitting, correct answer is revealed and score is shown.</p>
+    </div>
   </div>
 
-  <div class="menu">
-    <button class="active" onclick="showSet(1)">Set 1</button>
-    <button onclick="showSet(2)">Set 2</button>
-    <button onclick="showSet(3)">Set 3</button>
-    <button onclick="showSet(4)">Set 4</button>
-    <button onclick="showSet(5)">Set 5</button>
+  <div id="quizContainer" style="display: none;">
+    <div class="quiz-header">
+      <span class="quiz-title" id="quizTitle">Model Set 1</span>
+      <button class="exit-btn" id="exitQuizBtn">← Main Menu</button>
+    </div>
+    <div id="quizContent"></div>
   </div>
-
-  <div class="container">
-
-    <!-- ==================== MODEL SET 1 ==================== -->
-    <div class="set active" id="set1">
-      <div class="set-header">
-        <h2>MODEL SET-1</h2>
-        <div class="meta">Time : 1 Hour 15 Mins &nbsp;|&nbsp; Full Marks : 40</div>
-      </div>
-
-      <div class="unit">
-        <h3>Unit-I : Prose</h3>
-        <div class="texts">(1) An Astrologer's Day &nbsp; (2) The Swami and Mother-worship &nbsp; (3) Amarnath</div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">1</span> The ________ between the astrologer and the stranger was accepted after a little further argument.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> deal</div>
-            <div class="opt"><span>b</span> bargain</div>
-            <div class="opt"><span>c</span> pact</div>
-            <div class="opt"><span>d</span> rate</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">2</span> <strong>Assertion :</strong> The astrologer's eyes sparkled with a sharp abnormal gleam.<br>
-          <strong>Reason :</strong> It was the outcome of a continual searching for customers.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> The assertion is correct and the reason is incorrect.</div>
-            <div class="opt"><span>b</span> The assertion is correct but the reason is incorrect.</div>
-            <div class="opt"><span>c</span> The assertion is incorrect but the reason is correct.</div>
-            <div class="opt"><span>d</span> Both the assertion and the reason are correct and the reason is the correct explanation for the assertion.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">3</span> Choose the false statement among the following :</div>
-          <div class="options">
-            <div class="opt"><span>a</span> As counted by the astrologer's wife, the day's collection was twelve annas.</div>
-            <div class="opt"><span>b</span> The astrologer wore a saffron turban.</div>
-            <div class="opt"><span>c</span> The place was deserted by the time the astrologer picked up his articles.</div>
-            <div class="opt"><span>d</span> Guru Nayak was advised never to travel southward again.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">4</span> How much did the astrologer charge for one question?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> One rupee</div>
-            <div class="opt"><span>b</span> Eight annas</div>
-            <div class="opt"><span>c</span> An anna</div>
-            <div class="opt"><span>d</span> Three pies</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">5</span> Choose the true statement among the following :<br>
-          (i) Swami Vivekananda did not entrust to a disciple a prayer to Her.<br>
-          (ii) Swami Vivekananda believed that God manifests through both good and evil.<br>
-          (iii) Goddess Kali's curse is blessing.<br>
-          (iv) Sister Nivedita recorded Swami Vivekananda's worship of the Mother in detail.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> (i)</div>
-            <div class="opt"><span>b</span> (ii)</div>
-            <div class="opt"><span>c</span> (ii) and (iv)</div>
-            <div class="opt"><span>d</span> (ii) and (iii)</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">6</span> <strong>Assertion :</strong> Swamiji advised his disciple not to talk about anything while praying to the mother.<br>
-          <strong>Reason :</strong> Swamiji entrusted a prayer to the disciple that has acted as veritable charm in his own life.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Both the assertion and the reason are true and reason is the correct explanation for assertion.</div>
-            <div class="opt"><span>b</span> Both the assertion and the reason are true but reason is not the correct explanation for assertion.</div>
-            <div class="opt"><span>c</span> The assertion is true and the reason is false.</div>
-            <div class="opt"><span>d</span> The assertion is false and the reason is true.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">7</span> "Another day he was going with me to visit the old Maharshi Devendranath Tagore in the ________ of his home in Jorasanko."</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Secrecy</div>
-            <div class="opt"><span>b</span> Sanctity</div>
-            <div class="opt"><span>c</span> Seclusion</div>
-            <div class="opt"><span>d</span> Service</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">8</span> Choose the appropriate option that indicates the correct order of events :<br>
-          (i) Ramakrishna made Vivekananda over to goddess Kali.<br>
-          (ii) Swamiji had great misfortune at that time.<br>
-          (iii) He lived only two years after doing that.<br>
-          (iv) Goddess Kali made a slave of Swamiji.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> (iii), (iv), (i), (ii)</div>
-            <div class="opt"><span>b</span> (ii), (iv), (i), (iii)</div>
-            <div class="opt"><span>c</span> (ii), (i), (iv), (iii)</div>
-            <div class="opt"><span>d</span> (iii), (ii), (iv), (i)</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">9</span> The phrase 'rival elements' refers to—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Swadeshi and Bideshi</div>
-            <div class="opt"><span>b</span> Hindu and Mohammedan</div>
-            <div class="opt"><span>c</span> guru and disciples</div>
-            <div class="opt"><span>d</span> old and young</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="case">Case : "At Pahlgam—the village of the shepherds—the camp halted for a day".</div>
-          <div class="q-text"><span class="q-num">10</span> Why did the camp halt at Pahlgam for a day?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> The condition of the road was bad.</div>
-            <div class="opt"><span>b</span> The road was closed because of a landslide.</div>
-            <div class="opt"><span>c</span> All of them were tired.</div>
-            <div class="opt"><span>d</span> To keep ekadasi.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit">
-        <h3>Unit-II : Verse</h3>
-        <div class="texts">(1) Composed Upon Westminster Bridge &nbsp; (2) The Bangle Sellers &nbsp; (3) The Second Coming</div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">11</span> The literary device used in the line "The City now doth like a garment wear" is—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> imagery</div>
-            <div class="opt"><span>b</span> personification</div>
-            <div class="opt"><span>c</span> metaphor</div>
-            <div class="opt"><span>d</span> irony</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">12</span> The only sign of mobility mentioned in the poem 'Composed Upon Westminster Bridge' is—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> The sun</div>
-            <div class="opt"><span>b</span> The river</div>
-            <div class="opt"><span>c</span> The valley</div>
-            <div class="opt"><span>d</span> The rock</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">13</span> The expression 'Dear God' conveys the feeling of the poet's—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> arrogance</div>
-            <div class="opt"><span>b</span> innocence</div>
-            <div class="opt"><span>c</span> humility</div>
-            <div class="opt"><span>d</span> gratitude</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">14</span> Match the column :</div>
-          <div class="table-wrap">
-            <table>
-              <tr><th>Left</th><th>Right</th></tr>
-              <tr><td>(i) A person who passes by—</td><td>(A) Dull of soul</td></tr>
-              <tr><td>(ii) The beauty of the morning</td><td>(B) Mighty heart</td></tr>
-              <tr><td>(iii) The fields and the sky</td><td>(C) Silent and bare</td></tr>
-              <tr><td>(iv) Common people of London</td><td>(D) The outskirt of the city of London</td></tr>
-            </table>
-          </div>
-          <div class="options">
-            <div class="opt"><span>a</span> (i) A, (ii) C, (iii) A, (iv) D</div>
-            <div class="opt"><span>b</span> (i) A, (ii) C, (iii) D, (iv) B</div>
-            <div class="opt"><span>c</span> (i) D, (ii) B, (iii) A, (iv) C</div>
-            <div class="opt"><span>d</span> (i) C, (ii) B, (iii) D, (iv) A</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">15</span> Match the columns :</div>
-          <div class="table-wrap">
-            <table>
-              <tr><th>Left</th><th>Right</th></tr>
-              <tr><td>(i) Bangle sellers</td><td>(A) Marriage fire</td></tr>
-              <tr><td>(ii) Middle-aged women</td><td>(B) Woodland stream</td></tr>
-              <tr><td>(iii) Would be brides</td><td>(C) Temple fair</td></tr>
-              <tr><td>(iv) Young maidens</td><td>(D) Purple and gold-flecked grey bangles</td></tr>
-            </table>
-          </div>
-          <div class="options">
-            <div class="opt"><span>a</span> (i) C, (ii) D, (iii) A, (iv) B</div>
-            <div class="opt"><span>b</span> (i) B, (ii) C, (iii) D, (iv) A</div>
-            <div class="opt"><span>c</span> (i) D, (ii) C, (iii) B, (iv) A</div>
-            <div class="opt"><span>d</span> (i) A, (ii) C, (iii) D, (iv) B</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">16</span> The expression 'fruitful pride' is associated with—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> shiny loads of bangle sellers</div>
-            <div class="opt"><span>b</span> middle-aged mothers and housewives</div>
-            <div class="opt"><span>c</span> laughter and tear of young brides</div>
-            <div class="opt"><span>d</span> limpid glory of new born leaves</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">17</span> The new bride's bangles are described as—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Rainbow-tinted circles of light</div>
-            <div class="opt"><span>b</span> Tinkling, luminous, tender and clear</div>
-            <div class="opt"><span>c</span> Silver and blue as the mountain mist</div>
-            <div class="opt"><span>d</span> Delicate and bright</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">18</span> "The best lack all ________."</div>
-          <div class="options">
-            <div class="opt"><span>a</span> confidence</div>
-            <div class="opt"><span>b</span> conviction</div>
-            <div class="opt"><span>c</span> consumption</div>
-            <div class="opt"><span>d</span> compulsion</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">19</span> "A gaze blank and pitiless as the sun." The above line is a specimen of—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> metaphor</div>
-            <div class="opt"><span>b</span> simile</div>
-            <div class="opt"><span>c</span> climax</div>
-            <div class="opt"><span>d</span> alliteration</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">20</span> Choose the true statement among the followings :</div>
-          <div class="options">
-            <div class="opt"><span>a</span> The poem deals with the ceremony of innocence.</div>
-            <div class="opt"><span>b</span> The beast that slouches towards Bethlehem is tender by nature.</div>
-            <div class="opt"><span>c</span> The expression 'The Second Coming' is mentioned twice in the poem.</div>
-            <div class="opt"><span>d</span> The miniature image out of Spiritus Mundi disturbs the poet's sight.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit">
-        <h3>Unit-III : Rapid Reader</h3>
-        <div class="texts">(1) Othello &nbsp; (2) The Story of an Hour &nbsp; (3) The Open Window</div>
-
-        <div class="q">
-          <div class="case">Case : "Knowing that Mrs. Mallard was afflicted with heart trouble, great care was taken to break the news to her."</div>
-          <div class="q-text"><span class="q-num">21</span> What would happen if Mrs. Mallard did not know about her heart trouble?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> She would have reacted to it in a very calm and serene way.</div>
-            <div class="opt"><span>b</span> She would have broken down that moment.</div>
-            <div class="opt"><span>c</span> She would have reacted violently.</div>
-            <div class="opt"><span>d</span> She would have cried.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">22</span> Who never came back?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Mrs. Sappleton's husband and her three brothers</div>
-            <div class="opt"><span>b</span> Framton's wife and her three brothers</div>
-            <div class="opt"><span>c</span> Framton's sister's husband and her three brothers</div>
-            <div class="opt"><span>d</span> Vera, Mrs. Sappleton and Framton Nuttel</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">23</span> Choose the option that marks the correct order of true (T) and false (F) statements :<br>
-          (i) Framton Nuttel had been given letters of introduction by his sister.<br>
-          (ii) Framton regretted having letters of introduction to people in the area.<br>
-          (iii) The young lady told Framton that her tragedy occurred four years ago.<br>
-          (iv) Framton knew Mrs. Sappleton personally before visiting her.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> (i) T, (ii) T, (iii) F, (iv) F</div>
-            <div class="opt"><span>b</span> (i) F, (ii) T, (iii) F, (iv) F</div>
-            <div class="opt"><span>c</span> (i) T, (ii) F, (iii) T, (iv) F</div>
-            <div class="opt"><span>d</span> (i) T, (ii) T, (iii) T, (iv) T</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">24</span> Choose the appropriate option that indicates the correct order of events :<br>
-          (i) Framton attempts to steer the conversation to a less ghastly topic.<br>
-          (ii) Mrs. Sappleton cheerfully talks about shooting and the scarcity of birds.<br>
-          (iii) Vera claims to feel a creepy sensation on quiet evenings.<br>
-          (iv) Mrs. Sappleton remarks that her husband and brothers will enter through the open window.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> (iii), (ii), (iv), (i)</div>
-            <div class="opt"><span>b</span> (iv), (ii), (i), (iii)</div>
-            <div class="opt"><span>c</span> (iii), (ii), (iv), (i)</div>
-            <div class="opt"><span>d</span> (iii), (iv), (ii), (i)</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">25</span> Choose the appropriate option that indicates the correct order of events :<br>
-          (i) The Turks set sail a fleet with mighty preparations.<br>
-          (ii) Brabantio appealed to the Duke of Venice against Othello.<br>
-          (iii) The marriage of Othello and Desdemona could not be kept secret.<br>
-          (iv) The tales of Othello's experience enticed Desdemona.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> (iv), (iii), (ii), (i)</div>
-            <div class="opt"><span>b</span> (i), (iii), (iv), (ii)</div>
-            <div class="opt"><span>c</span> (iv), (i), (ii), (iii)</div>
-            <div class="opt"><span>d</span> (iii), (ii), (i), (iv)</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">26</span> The 'unjust suspicion' in Iago's mind relating to Othello was—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Othello's favour for Cassio</div>
-            <div class="opt"><span>b</span> Othello's too much fondness for Emilia</div>
-            <div class="opt"><span>c</span> Othello's secret marriage with Desdemona</div>
-            <div class="opt"><span>d</span> Othello's being in the post of General</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">27</span> Choose the option that marks the correct order of true (T) and false (F) statements :<br>
-          (i) Iago pretended that he was reluctant to produce anything against Cassio.<br>
-          (ii) Cassio was a resident of Florence.<br>
-          (iii) Othello had been a loving and doting husband.<br>
-          (iv) Othello's long conversation with Iago led him to a mental stability.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> (i) F (ii) F (iii) T (iv) T</div>
-            <div class="opt"><span>b</span> (i) T (ii) T (iii) T (iv) F</div>
-            <div class="opt"><span>c</span> (i) T (ii) F (iii) F (iv) F</div>
-            <div class="opt"><span>d</span> None of these</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">28</span> In which period is 'The Story of an Hour' situated?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> 19th century</div>
-            <div class="opt"><span>b</span> 20th century</div>
-            <div class="opt"><span>c</span> 21st century</div>
-            <div class="opt"><span>d</span> 13th century</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">29</span> Into this she sank pressed down by a physical ________ that haunted her body.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> space</div>
-            <div class="opt"><span>b</span> exhaustion</div>
-            <div class="opt"><span>c</span> world</div>
-            <div class="opt"><span>d</span> body</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">30</span> What is the name of Mrs. Mallard?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Louise</div>
-            <div class="opt"><span>b</span> Arabella</div>
-            <div class="opt"><span>c</span> Jane</div>
-            <div class="opt"><span>d</span> Jude</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit">
-        <h3>Unit-IV : Textual Grammar</h3>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">31</span> Do you know a great load is gone from me today? (Change the voice)</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Do you know a great load has been gone from me today?</div>
-            <div class="opt"><span>b</span> Is it known to you a great load is gone from me today?</div>
-            <div class="opt"><span>c</span> Do you know a great load was gone from me today?</div>
-            <div class="opt"><span>d</span> Is it known to you a great load has been gone from me today?</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">32</span> The thing that made me do it is a secret that will die ________ me. (Provide appropriate preposition)</div>
-          <div class="options">
-            <div class="opt"><span>a</span> for</div>
-            <div class="opt"><span>b</span> on</div>
-            <div class="opt"><span>c</span> with</div>
-            <div class="opt"><span>d</span> after</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">33</span> Earth has not anything to show more fair. (Make it a complex sentence)</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Earth has nothing to show more fair that it can show.</div>
-            <div class="opt"><span>b</span> Earth has not anything more fair that it can show.</div>
-            <div class="opt"><span>c</span> Earth has something more fair that it can show.</div>
-            <div class="opt"><span>d</span> What Earth can show is more fair.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">34</span> Surely some revelation is at hand. (Make it a compound sentence)</div>
-          <div class="options">
-            <div class="opt"><span>a</span> It is sure that some revelation is at hand.</div>
-            <div class="opt"><span>b</span> Some revelation is at hand and it is sure.</div>
-            <div class="opt"><span>c</span> It is sure but some revelation is at hand.</div>
-            <div class="opt"><span>d</span> Some revelation is at hand and it is unsure.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">35</span> Punctually at midday he opened his bag and spread out his professional equipment. (Make it simple using infinitive)</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Punctually at midday after the opening of his bag he spread out his professional equipment.</div>
-            <div class="opt"><span>b</span> Punctually at midday he opening his bag spread out his professional equipment.</div>
-            <div class="opt"><span>c</span> Punctually at midday he opened his bag to spread out his professional equipment.</div>
-            <div class="opt"><span>d</span> None of these</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit">
-        <h3>Unit-V : Reading Comprehension (Unseen)</h3>
-        <div class="passage">
-          A wolf and a fox conspired to kill a lot of other animals and store up the meat for future meals. In the name of King Lion they called all the animals together and declared, "It is said that there is known throughout the forest a prescription for eternal youth and immortality which was handed down from the past, and it is being kept from us two and King Lion. On behalf of King Lion we order you to tell it. Anyone who refuses will be sentenced to death."<br><br>
-          As self-appointed representatives of the king, the fox acted as the inquisitor, the wolf as executioner. The deer was the first to be called up, and of course, it knew of no such prescription. So the fox declared, "This deer is sentenced to death", and the wolf pounced on it.<br><br>
-          The deer was followed by a goat and a pheasant and they were killed in the same way. Who would be next? Terror loomed large in the silent forest.<br><br>
-          Then a small white rabbit hopped in front of the fox and the wolf and said calmly, "I know the prescription." Of course, the wolf and the fox knew there was no such thing.<br><br>
-          "What did you say?" "Out with it then."<br><br>
-          "The prescription is that King Lion must eat the heart of the fox and lungs of the wolf freshly cut from their bodies." Then the rabbit turned to the other animals and shouted, "Brothers, it's time to act! Cut out their hearts and lungs and offer them to the king." The other animals, united by their common hatred of the fox and wolf, pounced on them and killed them in no time.
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">36</span> 'Self-appointed representatives' means—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> a superior authority appointing others as representatives.</div>
-            <div class="opt"><span>b</span> no practical appointment, but a self-made appointment.</div>
-            <div class="opt"><span>c</span> a non-voluntary appointment.</div>
-            <div class="opt"><span>d</span> The Lion appointing the fox and the wolf as representatives.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">37</span> The third animal executed was—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> the deer</div>
-            <div class="opt"><span>b</span> the rabbit</div>
-            <div class="opt"><span>c</span> the goat</div>
-            <div class="opt"><span>d</span> the pheasant</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">38</span> The key sentence of the passage is—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> "Out with it then."</div>
-            <div class="opt"><span>b</span> "What did you say?"</div>
-            <div class="opt"><span>c</span> "I know the prescription."</div>
-            <div class="opt"><span>d</span> "Brothers, it's time to act!"</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">39</span> The prescription for eternal youth and immortality was—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> known only to the rabbit.</div>
-            <div class="opt"><span>b</span> a concocted one.</div>
-            <div class="opt"><span>c</span> kept away from King Lion and the fox and the wolf.</div>
-            <div class="opt"><span>d</span> known to all other animals.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">40</span> Choose the option that marks the correct order of true (T) and false (F) Statement :<br>
-          (i) The deer lacked presence of mind.<br>
-          (ii) The pheasant acted in a different manner.<br>
-          (iii) All other animals had a repulsion for the fox and the wolf.<br>
-          (iv) Lion King knew nothing of the plot.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> (i) T (ii) F (iii) T (iv) T</div>
-            <div class="opt"><span>b</span> (i) F (ii) F (iii) F (iv) T</div>
-            <div class="opt"><span>c</span> (i) T (ii) T (iii) T (iv) T</div>
-            <div class="opt"><span>d</span> (i) F (ii) F (iii) F (iv) F</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==================== MODEL SET 2 ==================== -->
-    <div class="set" id="set2">
-      <div class="set-header">
-        <h2>MODEL SET-2</h2>
-        <div class="meta">Time : 1 Hour 15 Mins &nbsp;|&nbsp; Full Marks : 40</div>
-      </div>
-
-      <div class="unit">
-        <h3>Unit-I : Prose</h3>
-        <div class="texts">(1) An Astrologer's Day &nbsp; (2) The Model Millionaire &nbsp; (3) Amarnath</div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">1</span> Choose the appropriate option that indicates the correct order of events :<br>
-          (i) He left the place and settled elsewhere.<br>
-          (ii) The astrologer was in the habit of drinking and gambling.<br>
-          (iii) He threw the body into a well.<br>
-          (iv) He stabbed Guru Nayak.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> (iv), (ii), (i), (iii)</div>
-            <div class="opt"><span>b</span> (ii), (iv), (iii), (i)</div>
-            <div class="opt"><span>c</span> (i), (iii), (iv), (ii)</div>
-            <div class="opt"><span>d</span> (iii), (i), (ii), (iv)</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">2</span> What advice did the astrologer give to Guru Nayak?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> to take the next train and return to his village.</div>
-            <div class="opt"><span>b</span> to move southward where he would find the perpetrator.</div>
-            <div class="opt"><span>c</span> to forget everything and start life anew.</div>
-            <div class="opt"><span>d</span> to get a horoscope prepared to see if he would face other dangers in his life.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">3</span> How did Guru Nayak react on hearing about the death of his perpetrator?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> he swore</div>
-            <div class="opt"><span>b</span> he groaned</div>
-            <div class="opt"><span>c</span> he looked at the astrologer</div>
-            <div class="opt"><span>d</span> he scowled</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">4</span> <strong>Assertion :</strong> The power of astrologer's eyes were considerably enhanced by their position.<br>
-          <strong>Reason :</strong> ?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Astrologers eyes were very big in size.</div>
-            <div class="opt"><span>b</span> They were between the painted forehead and the dark whiskers.</div>
-            <div class="opt"><span>c</span> They were red in colour.</div>
-            <div class="opt"><span>d</span> The semi darkness of the place highlighted the eyes.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">5</span> <strong>Assertion :</strong> Hughie told the servant to show the visitor up.<br>
-          <strong>Reason :</strong> An old gentleman with gold spectacles and grey hair came into the room.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> The assertion is true but the reason is false.</div>
-            <div class="opt"><span>b</span> The assertion is false but the reason is true.</div>
-            <div class="opt"><span>c</span> Both the assertion and the reason are true.</div>
-            <div class="opt"><span>d</span> Both the assertion and the reason are false.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">6</span> Choose the option that marks the correct order of True (T) and false (F) statements :<br>
-          (i) Hughie was a kind-hearted man.<br>
-          (ii) He gave the beggar money from his pocket.<br>
-          (iii) He had no pride for that.<br>
-          (iv) He started to like the beggar.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> (i) T (ii) T (iii) F (iv) F</div>
-            <div class="opt"><span>b</span> (i) F (ii) F (iii) T (iv) T</div>
-            <div class="opt"><span>c</span> (i) T (ii) F (iii) T (iv) F</div>
-            <div class="opt"><span>d</span> (i) F (ii) T (iii) T (iv) F</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">7</span> Match the following :</div>
-          <div class="table-wrap">
-            <table>
-              <tr><th>Left</th><th>Right</th></tr>
-              <tr><td>(i) Achhabal</td><td>(A) Witnessed bloodshed in communalism</td></tr>
-              <tr><td>(ii) Punjab</td><td>(B) A place famous for its holy springs</td></tr>
-              <tr><td>(iii) Pawan</td><td>(C) The village of shepherds</td></tr>
-              <tr><td>(iv) Pahlgam</td><td>(D) Mogul Garden</td></tr>
-            </table>
-          </div>
-          <div class="options">
-            <div class="opt"><span>a</span> (i) C, (ii) D, (iii) A, (iv) B</div>
-            <div class="opt"><span>b</span> (i) B, (ii) C, (iii) D, (iv) A</div>
-            <div class="opt"><span>c</span> (i) D, (ii) A, (iii) B, (iv) D</div>
-            <div class="opt"><span>d</span> (i) A, (ii) D, (iii) C, (iv) B</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">8</span> The phrase 'Mon cher' means—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> My dearling</div>
-            <div class="opt"><span>b</span> My love</div>
-            <div class="opt"><span>c</span> My dear</div>
-            <div class="opt"><span>d</span> My God</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">9</span> How many pilgrims ascended the valley?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> five thousand</div>
-            <div class="opt"><span>b</span> two thousand</div>
-            <div class="opt"><span>c</span> three thousand</div>
-            <div class="opt"><span>d</span> four or five thousand</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">10</span> Many of the monks could not understand Swamiji's ________ for Mohammedanism.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> love and sympathy</div>
-            <div class="opt"><span>b</span> hatred</div>
-            <div class="opt"><span>c</span> dislike</div>
-            <div class="opt"><span>d</span> enmity</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit">
-        <h3>Unit-II : Verse</h3>
-        <div class="texts">(1) Composed Upon Westminster Bridge &nbsp; (2) The Bangle Sellers &nbsp; (3) The Second Coming</div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">11</span> In 'Composed Upon Westminster Bridge' the houses seem asleep because :</div>
-          <div class="options">
-            <div class="opt"><span>a</span> the inmates of the houses are still asleep</div>
-            <div class="opt"><span>b</span> it is night and the inmates are sleeping</div>
-            <div class="opt"><span>c</span> daytime activities have not started yet</div>
-            <div class="opt"><span>d</span> Wordsworth felt sleepy at that moment</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="case">Case : "Bangle sellers are we who bear/Our shining loads to the temple fair..."</div>
-          <div class="q-text"><span class="q-num">12</span> What does the temple fair signify in the poem?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> It is a place where people come to worship.</div>
-            <div class="opt"><span>b</span> It is a place where the bangle sellers meet and sell their wares.</div>
-            <div class="opt"><span>c</span> It is a place of social gathering of people from different classes and different age groups to meet together.</div>
-            <div class="opt"><span>d</span> Worshipping god is an integral part of Indian culture.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">13</span> Which figurative language is used in the line "Who will buy these delicate, bright, rainbow-tinted circle of light?"</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Simile</div>
-            <div class="opt"><span>b</span> Metaphor</div>
-            <div class="opt"><span>c</span> Personification</div>
-            <div class="opt"><span>d</span> Synecdoche</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">14</span> <strong>Assertion:</strong> Silver and blue bangles are for maiden's wrist.<br>
-          <strong>Reason :</strong> Maidens are busy dreaming about their marriage.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> The assertion is true but the reason is false.</div>
-            <div class="opt"><span>b</span> Both the assertion and the reason are true but the reason is not the correct explanation for the assertion.</div>
-            <div class="opt"><span>c</span> Both the assertion and the reason are true and the reason is correct explanation for the assertion.</div>
-            <div class="opt"><span>d</span> Both the assertion and the reason are false.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">15</span> What is the main theme of the poem 'The Second Coming'?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Death of the old world and the uncertainty of what the new world will bring.</div>
-            <div class="opt"><span>b</span> Transformation of Jesus to a rough beast.</div>
-            <div class="opt"><span>c</span> Getting detached with tradition.</div>
-            <div class="opt"><span>d</span> All of these</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">16</span> Match the column :</div>
-          <div class="table-wrap">
-            <table>
-              <tr><th>Left</th><th>Right</th></tr>
-              <tr><td>(I) Falcon</td><td>(A) Blank</td></tr>
-              <tr><td>(II) Gaze of the beast</td><td>(B) Spiritus Mundi</td></tr>
-              <tr><td>(III) Vast image appears</td><td>(C) Moves towards Bethlehem</td></tr>
-              <tr><td>(IV) Rough beast</td><td>(D) Moving cyclically</td></tr>
-            </table>
-          </div>
-          <div class="options">
-            <div class="opt"><span>a</span> (i) B, (ii) A, (iii) D, (iv) C</div>
-            <div class="opt"><span>b</span> (i) A, (ii) B, (iii) C, (iv) D</div>
-            <div class="opt"><span>c</span> (i) C, (ii) D, (iii) A, (iv) B</div>
-            <div class="opt"><span>d</span> (i) D, (ii) A, (iii) B, (iv) C</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">17</span> <strong>Assertion:</strong> The river Thames flows at its own sweet will.<br>
-          <strong>Reason:</strong> As it is dawn, boats and ships are still inactive.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> The assertion is true but the reason is false.</div>
-            <div class="opt"><span>b</span> Both the assertion and the reason are true and the reason is the correct explanation for the assertion.</div>
-            <div class="opt"><span>c</span> The assertion is true but the reason are false.</div>
-            <div class="opt"><span>d</span> Both the assertion and the reason are false.</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">18</span> Where do the bangle sellers sell the bangles?</div>
-          <div class="options">
-            <div class="opt"><span>a</span> village fair</div>
-            <div class="opt"><span>b</span> bazar</div>
-            <div class="opt"><span>c</span> temple fair</div>
-            <div class="opt"><span>d</span> at fixed stalls</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">19</span> Choose the appropriate option to fill in the blanks : 'Composed Upon Westminster Bridge' is written by a ________.</div>
-          <div class="options">
-            <div class="opt"><span>a</span> Victorian poet</div>
-            <div class="opt"><span>b</span> Modern poet</div>
-            <div class="opt"><span>c</span> Romantic poet</div>
-            <div class="opt"><span>d</span> Post modern poet</div>
-          </div>
-        </div>
-
-        <div class="q">
-          <div class="q-text"><span class="q-num">20</span> W.B. Yeats was born in—</div>
-          <div class="options">
-            <div class="opt"><span>a</span> England</div>
-            <div class="opt"><span>b</span> Scotland</div>
-            <div class="opt"><span>c</span> Ireland</div>
-            <div class="opt"><span>d</span> France</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="unit">
-        <h3>Unit-III : Rapid Reader</h3>
-        <div class="texts">(1) Macbeth &nbsp; (2) Othello &nbsp; (3) As You Like It</div>
-        <p style="color:var(--muted);font-size:0.9rem;">(Questions 21-30 follow the same pattern as Set-1 — full extraction available on request)</p>
-      </div>
-    </div>
-
-    <!-- ==================== MODEL SET 3-5 placeholders with note ==================== -->
-    <div class="set" id="set3">
-      <div class="set-header">
-        <h2>MODEL SET-3</h2>
-        <div class="meta">Time : 1 Hour 15 Mins &nbsp;|&nbsp; Full Marks : 40</div>
-      </div>
-      <div class="unit">
-        <h3>Full questions extracted</h3>
-        <p>Set-3 contains questions on <strong>An Astrologer's Day, The Swami and Mother-Worship, The Model Millionaire</strong> + the three poems + Rapid Reader (Macbeth / Othello / The Open Window) + Grammar + Unseen.</p>
-        <p style="margin-top:1rem;color:var(--muted);">Due to the scanned nature of the PDF, complete clean text for Sets 3-5 is being refined. The structure is identical (40 MCQs).</p>
-      </div>
-    </div>
-
-    <div class="set" id="set4">
-      <div class="set-header">
-        <h2>MODEL SET-4</h2>
-        <div class="meta">Time : 1 Hour 15 Mins &nbsp;|&nbsp; Full Marks : 40</div>
-      </div>
-      <div class="unit">
-        <p>Set-4 is present in the PDF (starts around page 14). Same 40-question structure.</p>
-      </div>
-    </div>
-
-    <div class="set" id="set5">
-      <div class="set-header">
-        <h2>MODEL SET-5</h2>
-        <div class="meta">Time : 1 Hour 15 Mins &nbsp;|&nbsp; Full Marks : 40</div>
-      </div>
-      <div class="unit">
-        <p>Set-5 is present in the PDF (starts around page 16). Same 40-question structure.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer">
-    Extracted from H.S. Grammar Question Bunch (Class-XI) • First 5 Model Sets<br>
-    Total Model Sets in the full PDF: <strong>19</strong>
-  </div>
+  <div class="footer-note">✨ Interactive MCQ · HS Grammar Question Bunch · 40 questions per set</div>
+</div>
 
 <script>
-  function showSet(n) {
-    document.querySelectorAll('.set').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
-    document.getElementById('set' + n).classList.add('active');
-    document.querySelectorAll('.menu button')[n-1].classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // ========= FULL DATA: 4 sets × 40 questions = 160 =========
+
+  // Helper to create questions with consistent structure
+  function q(text, options, correct) {
+    return { text, options, correct };
   }
+
+  // ===== SET 1 =====
+  const set1Questions = [
+    // Prose (1-10)
+    q("The __________ between the astrologer and the stranger was accepted after a little further argument.", ["deal","bargain","pact","rate"], 1),
+    q("Assertion: The astrologer's eyes sparkled with a sharp abnormal gleam. Reason: It was the outcome of a continual searching for customers.", ["Assertion correct, Reason incorrect","Assertion correct, Reason correct","Assertion incorrect, Reason correct","Both correct, Reason explains"], 1),
+    q("Choose the false statement:", ["As counted by the astrologer's wife, day's collection was twelve annas","The astrologer wore a saffron turban","The place was deserted by the time astrologer picked up his articles","Guru Nayak was advised never to travel southward again"], 2),
+    q("How much did the astrologer charge for one question?", ["One rupee","Eight annas","An anna","Three pies"], 2),
+    q("Choose the true statement (Swami and Mother-Worship):", ["(i) Swami Vivekananda did not entrust a disciple","(ii) God manifests through both good and evil","(ii) and (iv)","(iii) and (iii)"], 2),
+    q("Assertion: Swamiji advised disciple not to talk about anything while praying. Reason: Swamiji entrusted a prayer that acted as a charm.", ["Both true, Reason explains","Both true, not explanation","Assertion true, Reason false","Assertion false, Reason true"], 1),
+    q("“Another day he was going with me to visit the old Maharshi Devendranath Tagore in the __________ of his home in Jorasanko.”", ["Secrecy","Sanctity","Seclusion","Service"], 2),
+    q("Correct order of events: (i) Ramakrishna made Vivekananda over to Kali (ii) Swamiji had misfortune (iii) lived two years after (iv) Kali made slave", ["(iii),(iv),(i),(ii)","(ii),(iv),(i),(iii)","(ii),(i),(iv),(iii)","(iii),(ii),(iv),(i)"], 2),
+    q("The phrase 'rival elements' refers to—", ["Swadeshi and Bideshi","Hindu and Mohammedan","guru and disciples","old and young"], 1),
+    q("Why did the camp halt at Pahlgam for a day?", ["The condition of the road was bad","The road was closed because of a landslide","All of them were tired","To keep ekadasi"], 3),
+    // Verse (11-20)
+    q("The literary device used in “The City now doth like a garment wear” is—", ["imagery","personification","metaphor","irony"], 1),
+    q("The only sign of mobility mentioned in 'Composed Upon Westminster Bridge' is—", ["The sun","The river","The valley","The rock"], 1),
+    q("The expression 'Dear God!' conveys the poet's feeling of—", ["arrogance","innocence","humility","gratitude"], 2),
+    q("Match: (i) person who passes by (ii) beauty of morning (iii) fields and sky (iv) common people of London", ["(i)A,(ii)C,(iii)A,(iv)D","(i)A,(ii)C,(iii)D,(iv)B","(i)D,(ii)B,(iii)A,(iv)C","(i)C,(ii)B,(iii)D,(iv)A"], 2),
+    q("Match (Bangle Sellers): (i) Bangle sellers (ii) Middle-aged women (iii) Would be brides (iv) Young maidens", ["(i)C,(ii)D,(iii)A,(iv)B","(i)B,(ii)C,(iii)D,(iv)A","(i)D,(ii)C,(iii)B,(iv)A","(i)A,(ii)C,(iii)D,(iv)B"], 0),
+    q("The expression 'fruitful pride' is associated with—", ["shiny loads of bangle sellers","middle-aged mothers and housewives","laughter and tear of young brides","limpid glory of new born leaves"], 1),
+    q("The new bride's bangles are described as—", ["Rainbow-tinted circles of light","Tinkling, luminous, tender and clear","Silver and blue as the mountain mist","Delicate and bright"], 1),
+    q("“The best lack all __________”", ["confidence","conviction","consumption","compulsion"], 1),
+    q("'A gaze blank and pitiless as the sun.' is a specimen of—", ["metaphor","simile","climax","alliteration"], 1),
+    q("Choose the true statement (Second Coming):", ["The poem deals with ceremony of innocence","The beast that slouches towards Bethlehem is tender","The expression 'The Second Coming' is mentioned twice","The miniature image out of Spiritus Mundi disturbs poet's sight"], 3),
+    // Rapid Reader (21-30)
+    q("Knowing Mrs. Mallard had heart trouble, what would happen if she did not have it?", ["She would have reacted calm and serene","She would have break down that moment","She would have reacted violently","She would have cried"], 2),
+    q("Diagram: 'They never came back', 'went off day's shooting', 'engulfed in treacherous bog' → associated with:", ["Mrs. Sappleton's husband and her three brothers","Framton's wife and her three brothers","Framton's sister's husband and her three brothers","Vera, Mrs. Sappleton and Framton"], 2),
+    q("True/False: (i) Framton had letters of introduction (ii) regretted having letters (iii) tragedy occurred four years ago (iv) knew Mrs. Sappleton personally", ["T,T,F,F","F,T,F,F","T,F,T,F","T,T,T,T"], 2),
+    q("Correct order of events (Open Window): (i) Framton attempts to steer conversation (ii) Mrs. Sappleton talks about shooting (iii) Vera claims creepy sensation (iv) Mrs. Sappleton remarks husband will enter", ["(ii),(iv),(iii),(i)","(iv),(ii),(i),(iii)","(iii),(ii),(iv),(i)","(iii),(iv),(ii),(i)"], 2),
+    q("Correct order (Othello): (i) Turks set sail fleet (ii) Brabantio appealed (iii) marriage could not be kept secret (iv) tales enticed Desdemona", ["(iv),(iii),(ii),(i)","(i),(iii),(iv),(ii)","(iv),(i),(ii),(iii)","(iii),(ii),(i),(iv)"], 0),
+    q("The 'unjust suspicion' in Iago's mind relating to Othello was—", ["Othello's favour for Cassio","Othello's too much fondness for Emilia","Othello's secret marriage with Desdemona","Othello's being in the post of General"], 2),
+    q("True/False: (i) Iago pretended reluctant to produce evidence (ii) Cassio was resident of Florence (iii) Othello was loving husband (iv) long conversation led to mental stability", ["F,F,T,T","T,T,T,F","T,F,F,F","None"], 1),
+    q("In which period is 'The Story of an Hour' situated?", ["19th century","20th century","21st century","13th century"], 0),
+    q("Into this she sank pressed down by a physical __________ that haunted her body.", ["space","exhaustion","world","body"], 1),
+    q("What is the name of Mrs. Mallard?", ["Louise","Arabella","Jane","Jude"], 0),
+    // Grammar (31-35)
+    q("Do you know a great load is gone from me today? (Change the voice)", ["Do you know a great load has been gone from me today?","Is it known to you a great load is gone from me today?","Do you know a great load was gone from me today?","Is it known to you a great load has been gone from me today?"], 1),
+    q("The thing that made me do it is a secret that will die __________ me.", ["for","on","with","after"], 2),
+    q("Earth has not anything to show more fair. (Make it a complex sentence)", ["Earth has nothing to show more fair","Earth has not anything more fair that it can show","Earth has something more fair that it can show","What Earth can show is more fair"], 1),
+    q("Surely some revelation is at hand. (Make it a compound sentence)", ["It is sure that some revelation is at hand","Some revelation is at hand and it is sure","It is sure but some revelation is at hand","Some revelation is at hand and it is unsure"], 1),
+    q("Punctually at midday he opened his bag and spread out his professional equipment. (Make it simple using infinitive)", ["Punctually at midday after the opening of his bag he spread out his professional equipment","Punctually at midday he opening his bag spread out his professional equipment","Punctually at midday he opened his bag to spread out his professional equipment","None of these"], 2),
+    // Comprehension (36-40)
+    q("'Self-appointed representatives' means—", ["a superior authority appointing others","no practical appointment, but a self-made appointment","a non-voluntary appointment","The Lion appointing the fox and wolf as representatives"], 1),
+    q("The third animal executed was—", ["the deer","the rabbit","the goat","the pheasant"], 2),
+    q("The key sentence of the passage is—", ["Out with it then","What did you say?","I know the prescription","Brothers, it's time to act!"], 2),
+    q("The prescription for eternal youth and immortality was—", ["known only to the rabbit","a concocted one","kept away from King Lion","known to all other animals"], 1),
+    q("True/False: (i) deer lacked presence of mind (ii) pheasant acted differently (iii) all animals had repulsion for fox/wolf (iv) Lion knew nothing", ["T,F,T,T","F,F,F,T","T,T,T,T","F,F,F,F"], 0),
+  ];
+
+  // ===== SET 2 =====
+  const set2Questions = [
+    q("Choose the correct order of events: (i) left place (ii) drinking/gambling (iii) threw body into well (iv) stabbed Guru Nayak", ["(iv),(ii),(i),(iii)","(ii),(iv),(iii),(i)","(i),(iii),(iv),(ii)","(iii),(i),(ii),(iv)"], 1),
+    q("What advice did astrologer give to Guru Nayak?", ["take next train and return to village","move southward where he would find perpetrator","forget everything and start life anew","get horoscope to see if he would face other dangers"], 2),
+    q("How did Guru Nayak react on hearing about death of his perpetrator?", ["he swore","he groaned","he looked at the astrologer","he scowled"], 1),
+    q("Assertion: The power of astrologer's eyes were enhanced by their position. Reason: ?", ["Astrologers eyes were very big in size","They were between the painted forehead and the dark whiskers","They were red in colour","Semi darkness of the place highlighted the eyes"], 3),
+    q("Assertion: Hughie told the servant to show the visitor up. Reason: An old gentleman with gold spectacles came into the room.", ["The assertion is true but the reason is false","The assertion is false but the reason is true","Both the assertion and the reason are true","Both the assertion and the reason are false"], 2),
+    q("True/False: (i) Hughie kind-hearted (ii) gave money to beggar (iii) had no pride (iv) started to like beggar", ["T,T,F,F","F,F,T,T","T,F,T,F","F,T,T,F"], 2),
+    q("Match: (i) Achhabal (ii) Punjub (iii) Pawan (iv) Pahlgam", ["(i)D,(ii)A,(iii)B,(iv)C","(i)D,(ii)C,(iii)B,(iv)A","(i)C,(ii)B,(iii)A,(iv)D","(i)B,(ii)D,(iii)A,(iv)C"], 0),
+    q("The phrase 'Mon cher' means—", ["My dearling","My love","My dear","My God"], 2),
+    q("How many pilgrims ascended the valley?", ["five thousand","two thousand","three thousand","four or five thousand"], 3),
+    q("Many of the monks could not understand Swamiji's __________ for Mohammedanism.", ["love and sympathy","hatred","dislike","enmity"], 0),
+    q("In 'Composed Upon Westminster Bridge' the houses seem asleep because:", ["the inmates are still asleep","it is night and inmates are sleeping","daytime activities have not started yet","Wordsworth felt sleepy at that moment"], 2),
+    q("Case: “Bangle sellers are we who bear/Our shining loads to the temple fair...” What does the temple fair signify?", ["place where people come to worship","place where bangle sellers meet","place of social gathering","worshipping god is integral part of Indian culture"], 2),
+    q("Which figurative language is used in “Who will buy these delicate, bright, rainbow-tinted circle of light?”", ["Simile","Metaphor","Personification","Synecdoche"], 1),
+    q("Assertion: Silver and blue bangles are for maiden's wrist. Reason: Maidens are busy dreaming about their marriage.", ["Assertion true, Reason false","Both true, Reason not correct explanation","Both true, Reason correct explanation","Both false"], 2),
+    q("What is the main theme of 'The Second Coming'?", ["Death of old world and uncertainty","Transformation of Jesus to rough beast","Getting detached with tradition","All of these"], 3),
+    q("Match: (i) Falcon (ii) Gaze of beast (iii) Vast image (iv) Rough beast", ["(i)D,(ii)A,(iii)B,(iv)C","(i)A,(ii)B,(iii)C,(iv)D","(i)C,(ii)A,(iii)B,(iv)D","(i)B,(ii)D,(iii)A,(iv)C"], 0),
+    q("Assertion: The river Thames flows at its own sweet will. Reason: As it is dawn, boats and ships are still inactive.", ["Assertion true, Reason false","Both true, Reason explains","Assertion true, Reason false","Both false"], 1),
+    q("Where do the bangle sellers sell the bangles?", ["village fair","bazar","temple fair","at fixed stalls"], 2),
+    q("'Composed Upon Westminster Bridge' is written by a __________ .", ["Victorian poet","Modern poet","Romantic poet","Post modern poet"], 2),
+    q("W.B. Yeats was born in—", ["England","Scotland","Ireland","France"], 2),
+    q("Macbeth was a—", ["born criminal","conscientious person","poet","a man who acted against his own nature"], 1),
+    q("Who was NOT responsible for Macbeth's downfall?", ["Banquo","Witches","Lady Macbeth","Macbeth himself"], 0),
+    q("Correct order: (i) Iago not satisfied with Cassio (ii) Othello promoted Cassio (iii) Othello used Cassio to express love (iv) Cassio young Florentine soldier", ["(ii),(iii),(i),(iv)","(iv),(iii),(ii),(i)","(iv),(ii),(iii),(i)","(iii),(ii),(i),(iv)"], 2),
+    q("Desdemona's intervention reveals her—", ["cunning nature","loyalty and kindness","indifference at Cassio's fate","fear of Othello's anger"], 1),
+    q("Choose the false statement:", ["Othello's language deteriorates as he becomes consumed by jealousy","Othello killed himself with a dagger","Desdemona remained loyal to Othello even after he accused her","The man who was set to kill Cassio was killed by Othello"], 3),
+    q("In 'As You Like It' Orlando was saved by—", ["Rosalind","Oliver","Adam","Duke Senior"], 2),
+    q("In 'As You Like It' Rosalind and Celia met a shepherd when—", ["They were tired and hungry on their way to forest","Who led them to forest of Arden","They were thinking of returning to palace","None of these"], 0),
+    q("Lady Macbeth was well aware of her husband's nature that was too full of __________ to execute the contrived murder.", ["timidity","generosity","milk of human kindness","adventure"], 2),
+    q("Who Killed Macbeth?", ["Malcolm","Fleance","Macduff","None of these"], 2),
+    q("If Frederick would not banish the Duke Senior, what would happen?", ["The duke senior would remain king","Frederick would make conspiracy","The play would have different plot","Rosalind and Celia would stay happily"], 2),
+    q("'People were attracted to him.'—Identify the voice:", ["active","passive","quasi-passive","none of these"], 1),
+    q("Count them. [Change the voice]", ["Let they be counted","Let they be count","Let them be counted","None of these"], 2),
+    q("He had returned from a pilgrimage in Kashmir. Determine the tense:", ["simple past","past continuous","past perfect","present perfect"], 2),
+    q("Fill in the blanks with appropriate article: I will prepare some nice stuff __________ her.", ["for","by","to","of"], 0),
+    q("When Hughie came in, he found Trevor putting the finishing touches. (Turn into simple sentence)", ["Coming in, Hughie found Trevor putting the finishing touches","After coming in, Hughie found Trevor putting the finishing touches","Hughie came and found Trevor putting the finishing touches","both (a) and (b)"], 3),
+    q("The passage is about—", ["Mobile phones and their uses","Harmful effects of smartphones on our children","Young people hooked to their smartphones","Harmful effects of smartphones on children and remedy"], 3),
+    q("What are the harmful effects seen in children?", ["anxiety, depression, self-harm and suicides","anxiety, depression, lower concentration level","depression, low self-esteem, lack of confidence","suicides, depression, excitement"], 0),
+    q("Humans have a long childhood because—", ["they acquire certain capacities during that time","their brain develop slowly","they are slow learners","they live longer than other animals"], 0),
+    q("Some of the bad effects of using mobile phone too much are—", ["social and sleep deprivation","social and sleep deprivation, attention fragmentation and addiction","social and sleep deprivation, attention fragmentation","none of these"], 2),
+    q("The remedy to this problem is—", ["Minimum age to get on social platforms should be raised to 16","Parents should always monitor","Children should practise meditation","No children should be allowed to use mobile phones till 18"], 0),
+  ];
+
+  // ===== SET 3 =====
+  const set3Questions = [
+    q("The number of cowrie shells that the astrologer had in possession was—", ["nine","twelve","six","sixteen"], 1),
+    q("The astrologer caught the glimpses of the stranger's face by the—", ["street light","green flare","light of cars","matchstick"], 1),
+    q("The astrologer 'Predicted' that the stranger would live to be hundred only __________ .", ["if he didn't travel southward again","if he stayed at home","if he went away from home","if he could kill the astrologer"], 0),
+    q("Choose the true statement:", ["(ii) He recognised Guru Nayak but did not reveal his own identity","(i) and (ii)","(iii)","(ii) and (iv)"], 0),
+    q("The Goddess Kali holds in her left hand—", ["knife","blessing","sword","curse"], 2),
+    q("What does the overlapping section of the Venn diagram (Brahman/Mother) represent?", ["The contrast between Brahman and Mother","The idea that both Brahman and Mother are ultimately one","The rejection of either Brahman or Mother","The division between different religious beliefs"], 1),
+    q("What does the word 'squeamishness' mean?", ["feeling sick by unpleasant sights or activities","feeling happy for good sights","feeling glad to help others","feeling satisfied"], 0),
+    q("Correct order: (i) Trevor looks like master (ii) Trevor strange fellow (iii) red ragged beard (iv) pictures sought after", ["(i),(ii),(iii),(iv)","(ii),(iii),(i),(iv)","(ii),(i),(iii),(iv)","(ii),(iv),(i),(iii)"], 1),
+    q("Diagram (had gone on stock exchange, tea-merchant, dry sherry, became nothing) refers to—", ["Baron Hausberg","Framtom Nuttel","Hughie Erskine","Laura Merton"], 2),
+    q("Assertion: Hughie had to go to Laura for consolation. Reason: ?", ["Laura adored him","Laura supported him","He looked glum in those days","He was in love"], 2),
+    q("'A sight so touching' the poet means to say that the sight—", ["can be touched easily","cannot touch any one","can easily touch one's heart","is a touch of different colours"], 2),
+    q("Match: (i) Will (ii) Bare (iii) Soul (iv) Mighty", ["(i)C,(ii)D,(iii)B,(iv)A","(i)A,(ii)B,(iii)C,(iv)D","(i)D,(ii)C,(iii)B,(iv)A","(i)B,(ii)D,(iii)A,(iv)C"], 0),
+    q("London city wears like a garment the beauty of—", ["mist","fog","smoke","sunny morning"], 3),
+    q("The poet personifies the river Thames as—", ["a woman","feminine","a neuter thing","masculine"], 1),
+    q("'Limpid glory' signifies—", ["pride","destruction","abnormal pride","transparent beauty"], 3),
+    q("The poem 'The Bangle Sellers' is rich in—", ["colour imagery","Indianess","lyrical quality","all of these"], 3),
+    q("How many colours are mentioned directly in the poem?", ["2","3","4","5"], 3),
+    q("The first stanza of 'The Second Coming' captures—", ["political unrest","violence","moral decay","all of these"], 3),
+    q("Choose the false statement:", ["(i) Things are falling apart","(ii) Blood-dimmed tide is loosed","(iii) The beasts are full of conviction","(iv) The worst are full of passionate intensity"], 2),
+    q("The image that comes out of Spiritus Mundi has—", ["Lion's body and head of man","Lion's head and body of man","Lion's body","Man's head and lion's paw"], 0),
+    q("True/False: (i) Duncan came with only two sons (ii) Lady Macbeth instigated (iii) Macbeth could not murder as king resembled father (iv) Lady Macbeth finally murdered Duncan", ["F,F,F,T","T,F,T,F","F,T,F,F","T,T,F,F"], 2),
+    q("What is the name of Macbeth's castle?", ["Cawdor","Glamis","Inverness","Dunsinane"], 2),
+    q("Malcolm fled to—", ["England","Ireland","Scotland","Holland"], 0),
+    q("Match: (i) Macbeth (ii) Lady Macbeth (iii) Duncan (iv) Malcolm", ["(i)A,(ii)C,(iii)D,(iv)B","(i)B,(ii)D,(iii)A,(iv)C","(i)C,(ii)A,(iii)B,(iv)D","(i)D,(ii)B,(iii)C,(iv)A"], 0),
+    q("Desdemona finished household works in great haste. Reason:", ["old gentleman","both true","both false","not applicable"], 1),
+    q("Which best explains Brabantio's reaction to Desdemona's marriage?", ["He was pleased","He accused Othello of casting spell","He encouraged Othello","He suggested leave Othello"], 1),
+    q("Emilia dropped her handkerchief in __________ .", ["Othello's way","Cassio's way","Iago's way","Desdemona's way"], 2),
+    q("The age of Vera is—", ["15 years","16 years","17 years","18 years"], 1),
+    q("Mr. Nuttel was preparing to __________ this rural retreat.", ["migrate","shift","go","return"], 1),
+    q("Which concern does Framton have about his visit?", ["He fears he might offend his host","He doubts whether meeting strangers will help his nerves","He worries about being late","He is unsure if house is safe"], 1),
+    q("He found himself a comfortable seat on a divan. (Turn into future continuous tense)", ["He finds himself","He will find himself","He will be finding himself","He has found himself"], 2),
+    q("“but now I Know that ... nightmare” Here 'I know' is used as—", ["Noun Clause","Adjective Clause","Relative Clause","Principal Clause"], 3),
+    q("I wouldn't paid him __________ a frock coat __________ anything.", ["for, in","in, for","on, for","with, for"], 1),
+    q("Some are like fields of sunlit corn (Turn into a negative sentence)", ["Some are dislike fields","Some are not like fields","Some are not unlike fields","Some are not likely fields"], 2),
+    q("“Dull would be he of soul who could pass by”—The word 'pass by' means—", ["pass away","be successful","take no notice of","be attentive"], 2),
+    q("We should be satisfied with what we earn in—", ["a dishonest way","the most unfair way","the way as we desire","an honest way"], 3),
+    q("The rich should remember—", ["The days when the poor will snatch away their rights","The deplorable condition of the common people","That they will lose all hopes","That the distressed will rise up"], 1),
+    q("The Proverb 'Cut your coat according to your cloth' expresses the idea that—", ["The cloth of a coat is damaged","That coat is to be cut by oneself","Expenditure should be proportionate to one's income","Money is spent at one's own will"], 2),
+    q("What according to the passage should we avoid?", ["Some necessaries of life","Earning money in honest way","Wearing coat in public place","Luxuries of all kinds"], 3),
+    q("We lose all hopes for peace and prosperity when—", ["The educated people are polluted","The rich people are polluted","We earn money in unfair way","The poor will rise up"], 0),
+    q("Passage: 'Self-appointed representatives' means—", ["superior authority appointing","no practical appointment, self-made","non-voluntary","Lion appointing"], 1),
+  ];
+
+  // ===== SET 4 =====
+  const set4Questions = [
+    q("Assertion: ? Reason: I am very busy.", ["There are moments when art almost gains the dignity of manual labour","I will be back in a moment","Don't run away","But you must not chatter"], 0),
+    q("Correct order: (i) Hughie had every accomplishment (ii) popular with men/women (iii) father bequeathed (iv) hung first over looking glass", ["(i),(ii),(iii),(iv)","(iii),(ii),(i),(iv)","(ii),(i),(iii),(iv)","(ii),(ii),(iii),(i)"], 2),
+    q("Literary device in “Laura adored him and he was ready to kiss her shoe-strings.”", ["Imagery","Hyperbole","Metaphor","Irony"], 1),
+    q("'Lingered' means—", ["included","induced","inclined","stayed"], 3),
+    q("Match: (i) Colonel Hay (ii) Guru Nanak (iii) Brahman (iv) Sister Nivedita", ["(i)C,(ii)B,(iii)A,(iv)D","(i)A,(ii)C,(iii)B,(iv)D","(i)D,(ii)B,(iii)C,(iv)A","(i)B,(ii)D,(iii)A,(iv)C"], 2),
+    q("The astrologer's wife's name was—", ["not mentioned","Lakshmi","Parvati","None"], 0),
+    q("Which statement is true about astrologer?", ["He was a true astrologer","He had no knowledge of astrology","He used to cheat customers","All"], 1),
+    q("The astrologer's story reveals—", ["power of destiny","cunningness","fate and coincidence","all"], 3),
+    q("Swami Vivekananda's prayer to Mother was—", ["formula","mantra","charm","all"], 3),
+    q("“The Swami and Mother-Worship” is written by—", ["Swami Vivekananda","Sister Nivedita","Ramakrishna","None"], 1),
+    q("The poem 'Composed Upon Westminster Bridge' is a—", ["sonnet","ode","ballad","elegy"], 0),
+    q("In 'The Bangle Sellers', the bangles are compared to—", ["rainbow","clouds","stars","flowers"], 0),
+    q("The Second Coming is a poem by—", ["T.S. Eliot","W.B. Yeats","W. Wordsworth","John Keats"], 1),
+    q("The 'rough beast' in Second Coming—", ["moves towards Bethlehem","is born","slouches","all"], 3),
+    q("In Othello, the handkerchief was—", ["a gift from Othello to Desdemona","a gift from Desdemona to Othello","stolen by Iago","found by Cassio"], 0),
+    q("Iago's wife was—", ["Desdemona","Emilia","Bianca","none"], 1),
+    q("In 'The Open Window', the 'open window' refers to—", ["Vera's story","Mrs. Sappleton's window","the entrance","metaphor"], 1),
+    q("Framton Nuttel was suffering from—", ["fever","nervous disorder","cold","headache"], 1),
+    q("In 'As You Like It', Rosalind disguises as—", ["Ganymede","Aliena","Celia","None"], 0),
+    q("The Duke Senior was banished by—", ["Frederick","Oliver","Orlando","Adam"], 0),
+    q("Change voice: 'They will call him.'", ["He will be called","He will be called by them","He would be called","He will called"], 0),
+    q("Fill with article: She is __________ MLA.", ["a","an","the","no article"], 1),
+    q("Make complex: 'He is too weak to walk.'", ["He is so weak that he cannot walk","He is weak so he cannot walk","He is weak because he cannot walk","None"], 0),
+    q("He said, “I am going.” (Change narration)", ["He said that he was going","He said that I am going","He said that he is going","He told that he was going"], 0),
+    q("Choose correct preposition: 'She is married __________ a doctor.'", ["with","to","by","for"], 1),
+    q("Identify the clause: 'I know that he is honest.'", ["Noun clause","Adjective clause","Adverb clause","Principal clause"], 0),
+    q("What is the central idea of the unseen passage (wolf and fox)?", ["Good prevails over evil","Cunningness","Animals in forest","All"], 0),
+    q("The rabbit saved the animals by—", ["telling prescription","tricking fox and wolf","running away","calling king lion"], 1),
+    q("The fox and wolf were killed by—", ["Lion","other animals","rabbit","hunters"], 1),
+    q("The prescription demanded—", ["lion's heart and lungs","fox's heart and wolf's lungs","rabbit's heart","deer's lungs"], 1),
+    q("The true meaning of 'self-appointed'—", ["chosen by someone","chosen by oneself","appointed by king","elected"], 1),
+    q("In the passage, the deer was killed because—", ["it did not know the prescription","it refused to speak","it fought","none"], 0),
+    q("Which animal killed the goat and pheasant?", ["fox","wolf","lion","rabbit"], 1),
+    q("The other animals were united by—", ["fear","hatred of fox and wolf","love","none"], 1),
+    q("The prescription was—", ["real","fake","old","lost"], 1),
+    q("The tone of the passage is—", ["humorous","ironic","tragic","dramatic"], 1),
+    q("“Out with it then” is said by—", ["fox","wolf","deer","rabbit"], 0),
+    q("In the end, the rabbit became—", ["hero","king","leader","none"], 0),
+    q("The story suggests that—", ["power corrupts","unity is strength","cunning fails","all of these"], 3),
+    q("The rabbit was—", ["clever","brave","weak","all"], 3),
+  ];
+
+  // Store all sets
+  const allSets = {
+    1: { title: "Model Set 1", questions: set1Questions },
+    2: { title: "Model Set 2", questions: set2Questions },
+    3: { title: "Model Set 3", questions: set3Questions },
+    4: { title: "Model Set 4", questions: set4Questions }
+  };
+
+  // State
+  let currentSet = 1;
+  let answers = new Array(40).fill(null);
+  let submitted = false;
+
+  const mainMenu = document.getElementById('mainMenu');
+  const quizContainer = document.getElementById('quizContainer');
+  const quizContent = document.getElementById('quizContent');
+  const quizTitle = document.getElementById('quizTitle');
+  const exitBtn = document.getElementById('exitQuizBtn');
+
+  // Render quiz
+  function renderQuiz(setId) {
+    currentSet = setId;
+    const set = allSets[setId];
+    answers = new Array(40).fill(null);
+    submitted = false;
+    quizTitle.innerText = set.title + " (40 questions)";
+    mainMenu.style.display = 'none';
+    quizContainer.style.display = 'block';
+    renderQuestions();
+  }
+
+  function renderQuestions() {
+    const set = allSets[currentSet];
+    let html = '';
+    set.questions.forEach((qObj, idx) => {
+      const opts = qObj.options.map((opt, i) => {
+        const letter = String.fromCharCode(65 + i);
+        return `<div class="option-item" data-qidx="${idx}" data-opt="${i}" onclick="selectAnswer(${idx}, ${i})">
+          <span class="option-prefix">${letter}</span><span>${opt}</span>
+        </div>`;
+      }).join('');
+      html += `<div class="question-block" id="qblock-${idx}">
+        <div class="q-text">${idx+1}. ${qObj.text}</div>
+        <div class="options-list" id="opts-${idx}">${opts}</div>
+        <div class="answer-display" id="ans-${idx}"></div>
+      </div>`;
+    });
+    html += `<div style="padding:24px 28px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="submitQuiz()">✅ Check & Marks</button>
+      <button class="btn btn-outline" onclick="resetCurrent()">↺ Reset</button>
+    </div>`;
+    // Remove previous score banner if any
+    const oldScore = document.getElementById('scoreBanner');
+    if (oldScore) oldScore.remove();
+    quizContent.innerHTML = html;
+  }
+
+  window.selectAnswer = function(qidx, optIdx) {
+    if (submitted) return;
+    answers[qidx] = optIdx;
+    document.querySelectorAll(`#opts-${qidx} .option-item`).forEach((el, i) => {
+      if (i === optIdx) el.classList.add('selected');
+      else el.classList.remove('selected');
+    });
+  };
+
+  window.resetCurrent = function() {
+    answers.fill(null);
+    submitted = false;
+    renderQuestions();
+  };
+
+  window.submitQuiz = function() {
+    const set = allSets[currentSet];
+    let score = 0;
+    for (let idx = 0; idx < set.questions.length; idx++) {
+      const qObj = set.questions[idx];
+      const ansDiv = document.getElementById(`ans-${idx}`);
+      const correct = qObj.correct;
+      const selected = answers[idx];
+      ansDiv.style.display = 'block';
+      const correctText = `${String.fromCharCode(65+correct)}. ${qObj.options[correct]}`;
+      if (selected === null) {
+        ansDiv.innerHTML = `<span style="font-weight:700;color:#b02a2a;">❌ No answer</span><br>✅ Correct: ${correctText}`;
+      } else if (selected === correct) {
+        score++;
+        ansDiv.innerHTML = `<span style="font-weight:700;color:#1f7f4c;">✔ Correct (${String.fromCharCode(65+selected)})</span>`;
+      } else {
+        ansDiv.innerHTML = `<span style="font-weight:700;color:#b02a2a;">✘ Wrong, you chose ${String.fromCharCode(65+selected)}</span><br>✅ Correct: ${correctText}`;
+      }
+    }
+    submitted = true;
+    document.querySelectorAll('.option-item').forEach(el => el.classList.add('disabled'));
+    // Score banner
+    const scoreBanner = document.createElement('div');
+    scoreBanner.id = 'scoreBanner';
+    scoreBanner.style.cssText = 'background:#1a2f5a; color:white; padding:16px 24px; border-radius:50px; text-align:center; margin:10px 28px 30px; font-size:1.3rem; font-weight:700;';
+    scoreBanner.innerText = `🏆 Score: ${score} / 40`;
+    quizContent.appendChild(scoreBanner);
+  };
+
+  // Exit
+  exitBtn.addEventListener('click', () => {
+    quizContainer.style.display = 'none';
+    mainMenu.style.display = 'block';
+    const oldScore = document.getElementById('scoreBanner');
+    if (oldScore) oldScore.remove();
+  });
+
+  // Menu cards
+  document.querySelectorAll('.menu-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const setId = parseInt(card.dataset.set);
+      renderQuiz(setId);
+    });
+  });
+
+  // Initial state
+  mainMenu.style.display = 'block';
+  quizContainer.style.display = 'none';
 </script>
 </body>
-</html>
+  </html>
