@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📝 HS Grammar · 4 Model Sets · 160 MCQs with Sections</title>
+    <title>📝 HS Grammar · 4 Model Sets · 160 MCQs with Full Passages</title>
     <style>
         * {
             box-sizing: border-box;
@@ -117,8 +117,25 @@
             font-weight: 800;
             color: #1a2f5a;
             border-left: 6px solid #2a4a7f;
-            margin: 0;
             border-bottom: 2px solid #dde5f0;
+        }
+        .passage-box {
+            background: #f9fafc;
+            border: 2px dashed #b0c4de;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin: 16px 28px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #1b2b4a;
+            font-style: italic;
+        }
+        .passage-box h4 {
+            font-style: normal;
+            font-weight: 700;
+            color: #1a2f5a;
+            margin-bottom: 8px;
+            font-size: 1rem;
         }
         .question-block {
             padding: 18px 28px;
@@ -264,7 +281,7 @@
             </div>
         </div>
         <div style="background:#f7fafe; border-radius:20px; padding:20px;">
-            <p style="font-weight:500;">💡 Click any set to begin. Each quiz is divided into sections (Prose, Verse, Rapid Reader, Grammar, Unseen). Select your answer, then press <b>"Check & Marks"</b> to reveal the correct answer and your score.</p>
+            <p style="font-weight:500;">💡 Click any set to begin. Each quiz is divided into 5 sections. The Unseen section includes the full passage. Select your answer, then press <b>"Check & Marks"</b> to see correct answers and score.</p>
         </div>
     </div>
     <div id="quizContainer" style="display:none;">
@@ -274,16 +291,24 @@
         </div>
         <div id="quizContent"></div>
     </div>
-    <div class="footer-note">✨ Interactive MCQ · HS Grammar Question Bunch · Sections: Prose, Verse, Rapid Reader, Grammar, Unseen</div>
+    <div class="footer-note">✨ Interactive MCQ · Full Passages Included · Sections: Prose, Verse, Rapid Reader, Grammar, Unseen</div>
 </div>
 
 <script>
-    // Helper to create question objects
     function q(text, options, correct) {
         return { text, options, correct };
     }
 
-    // ========== SET 1 (40 questions with sections) ==========
+    // ========== FULL PASSAGES ==========
+    const passage1 = `A wolf and a fox conspired to kill a lot of other animals and store up the meat for future meals. In the name of King Lion they called all the animals together and declared, "It is said that there is known throughout the forest a prescription for eternal youth and immortality which was handed down from the past, and it is being kept from us two and King Lion. On behalf of King Lion we order you to tell it. Anyone who refuses will be sentenced to death." As self-appointed representatives of the king, the fox acted as the inquisitor, the wolf as executioner. The deer was the first to be called up, and of course, it knew of no such prescription. So the fox declared, "This deer is sentenced to death", and the wolf pounced on it. The deer was followed by a goat and a pheasant and they were killed in the same way. Who would be next? Terror loomed large in the silent forest. Then a small white rabbit hopped in front of the fox and the wolf and said calmly, "I know the prescription." Of course, the wolf and the fox knew there was no such thing. "What did you say?" "Out with it then." "The prescription is that King Lion must eat the heart of the fox and lungs of the wolf freshly cut from their bodies." Then the rabbit turned to the other animals and shouted, "Brothers, it's time to act! Cut out their hearts and lungs and offer them to the king." The other animals, united by their common hatred of the fox and wolf, pounced on them and killed them in no time.`;
+
+    const passage2 = `Kids are not alright, argues "The Anxious Generation: How the Great Rewiring of Childhood Is Causing an Epidemic of Mental Illness" by Jonathan Haidt. Between 2010 and 2015, rates of anxiety and depression went up sharply for adolescents in many countries, while older cohorts were unaffected. Only one-third of college students reported feeling anxious less than half the time or never. Self-harm and suicide rates also rose. That coincides with the smartphone era. Gen Z is the first to grow up with a portal in their pocket, watching the shiny lives of their friends and distant influencers. Being 'forever elsewhere' is a profound transformation of human consciousness and relationships, the book argues. Pre-puberty is a critical learning period for language and culture, and during this period, Gen Z's identities, emotions, selfhood and relationships have been mediated through phones. But this drastic rewiring of childhood is also about how adults began to overprotect children. Unsupervised play declined around the same time that personal computers took off, in the late 1980s. A wide discourse of stranger danger and 'safetyism' took over parenting and schooling. This blocked children's experience in basic ways. Humans have a long childhood to acquire certain capacities. Kids need to take risks and chase thrills, to be antifragile, learn to manage in the physical world. Face-to-face and shoulder-to-shoulder interaction and play attunes them to others. They actually need some acute stress to build emotional resilience. Parents struggle too. They can see the harms of social media and online games, but the world has configured itself so that anyone who resists screentime is condemning their child to social isolation. Think of the opportunity costs of that time whiled away, from social and sleep deprivation to attention fragmentation and addiction. Internet adulthood starts at the age of 13: that's when digital platforms allow you to start an account. In teen years, reward centres of the brain are active, but the frontal cortex that determines self-control does not develop till one's mid-20s. So, these kids are insecure, easily swayed by social validation. One could argue that this anxiety and depression is caused by objectively bad conditions this generation faces—climate change, wars, political instability, and a precarious future. But previous generations have not been laid low by external situations, they have been energised as if to take collective action. Today, world events are pumped through their phones, not as news but emotionally loaded stories, which have a different impact, as emotions are contagious. What can be done about this? Govt. and tech companies have to get their act together, recognising the harms and vulnerabilities of teens. At the least, the minimum age to get on these platforms should be raised to 16 and smartphones should not be given to children before high school. Phone-free schools, plenty of play and childhood independence are essential.`;
+
+    const passage3 = `There is a proverb 'cut your coat according to your cloth'. We should be satisfied with what we earn in an honest way. In a poor country like ours luxuries of all kinds should be avoided. The rich should not forget the pitiable condition of the common people. Some people earn money in the most unfair way. They spend much more than what they should. They forget that days are not far off when the poor and the distressed will take revenge. The educated people should be honest. If they are polluted, we shall lose all hopes for peace and prosperity. In a poor country like ours luxury of all kinds regarding rights should be curbed. We should live within our means and contribute to the welfare of society.`;
+
+    const passage4 = `A wolf and a fox conspired to kill a lot of other animals and store up the meat for future meals. In the name of King Lion they called all the animals together and declared, "It is said that there is known throughout the forest a prescription for eternal youth and immortality which was handed down from the past, and it is being kept from us two and King Lion. On behalf of King Lion we order you to tell it. Anyone who refuses will be sentenced to death." As self-appointed representatives of the king, the fox acted as the inquisitor, the wolf as executioner. The deer was the first to be called up, and of course, it knew of no such prescription. So the fox declared, "This deer is sentenced to death", and the wolf pounced on it. The deer was followed by a goat and a pheasant and they were killed in the same way. Who would be next? Terror loomed large in the silent forest. Then a small white rabbit hopped in front of the fox and the wolf and said calmly, "I know the prescription." Of course, the wolf and the fox knew there was no such thing. "What did you say?" "Out with it then." "The prescription is that King Lion must eat the heart of the fox and lungs of the wolf freshly cut from their bodies." Then the rabbit turned to the other animals and shouted, "Brothers, it's time to act! Cut out their hearts and lungs and offer them to the king." The other animals, united by their common hatred of the fox and wolf, pounced on them and killed them in no time.`;
+
+    // ========== SET 1 ==========
     const set1Prose = [
         q("The __________ between the astrologer and the stranger was accepted after a little further argument.", ["deal","bargain","pact","rate"], 1),
         q("Assertion: The astrologer's eyes sparkled with a sharp abnormal gleam. Reason: It was the outcome of a continual searching for customers.", ["Assertion correct, Reason incorrect","Assertion correct, Reason correct","Assertion incorrect, Reason correct","Both correct, Reason explains"], 1),
@@ -491,27 +516,33 @@
         q("The rabbit was—", ["clever","brave","weak","all"], 3)
     ];
 
-    // Combine sections into sets
-    function combineSet(prose, verse, rapid, grammar, unseen) {
+    // Map sections to passages for display
+    function getPassageForSet(setId) {
+        if (setId === 1) return passage1;
+        if (setId === 2) return passage2;
+        if (setId === 3) return passage3;
+        return passage4;
+    }
+
+    function combineSet(prose, verse, rapid, grammar, unseen, passage) {
         return [
             { section: "Prose", questions: prose },
             { section: "Verse (Poem)", questions: verse },
             { section: "Rapid Reader", questions: rapid },
             { section: "Textual Grammar", questions: grammar },
-            { section: "Reading Comprehension (Unseen)", questions: unseen }
+            { section: "Reading Comprehension (Unseen)", passage: passage, questions: unseen }
         ];
     }
 
     const allSets = {
-        1: { title: "Model Set 1", sections: combineSet(set1Prose, set1Verse, set1Rapid, set1Grammar, set1Unseen) },
-        2: { title: "Model Set 2", sections: combineSet(set2Prose, set2Verse, set2Rapid, set2Grammar, set2Unseen) },
-        3: { title: "Model Set 3", sections: combineSet(set3Prose, set3Verse, set3Rapid, set3Grammar, set3Unseen) },
-        4: { title: "Model Set 4", sections: combineSet(set4Prose, set4Verse, set4Rapid, set4Grammar, set4Unseen) }
+        1: { title: "Model Set 1", sections: combineSet(set1Prose, set1Verse, set1Rapid, set1Grammar, set1Unseen, passage1) },
+        2: { title: "Model Set 2", sections: combineSet(set2Prose, set2Verse, set2Rapid, set2Grammar, set2Unseen, passage2) },
+        3: { title: "Model Set 3", sections: combineSet(set3Prose, set3Verse, set3Rapid, set3Grammar, set3Unseen, passage3) },
+        4: { title: "Model Set 4", sections: combineSet(set4Prose, set4Verse, set4Rapid, set4Grammar, set4Unseen, passage4) }
     };
 
-    // State
     let currentSet = 1;
-    let answers = {}; // key: globalQIndex (0-39)
+    let answers = {};
     let submitted = false;
 
     const mainMenu = document.getElementById('mainMenu');
@@ -520,21 +551,9 @@
     const quizTitle = document.getElementById('quizTitle');
     const exitBtn = document.getElementById('exitQuizBtn');
 
-    function getFlatQuestions(setId) {
-        const sections = allSets[setId].sections;
-        let allQ = [];
-        sections.forEach(sec => {
-            sec.questions.forEach(qObj => {
-                allQ.push(qObj);
-            });
-        });
-        return allQ;
-    }
-
     function renderQuiz(setId) {
         currentSet = setId;
         const set = allSets[setId];
-        // Reset answers
         answers = {};
         submitted = false;
         quizTitle.innerText = set.title + " (40 questions)";
@@ -545,7 +564,11 @@
         let globalIdx = 0;
         set.sections.forEach(section => {
             html += `<div class="section-header">${section.section}</div>`;
-            section.questions.forEach((qObj, localIdx) => {
+            // Show passage before unseen questions
+            if (section.passage) {
+                html += `<div class="passage-box"><h4>📖 Read the passage carefully:</h4><p>${section.passage}</p></div>`;
+            }
+            section.questions.forEach((qObj) => {
                 const idx = globalIdx;
                 const opts = qObj.options.map((opt, i) => {
                     const letter = String.fromCharCode(65 + i);
@@ -586,7 +609,10 @@
     };
 
     window.submitQuiz = function() {
-        const flatQ = getFlatQuestions(currentSet);
+        const flatQ = [];
+        allSets[currentSet].sections.forEach(sec => {
+            sec.questions.forEach(q => flatQ.push(q));
+        });
         let score = 0;
         for (let idx = 0; idx < 40; idx++) {
             const qObj = flatQ[idx];
@@ -628,4 +654,4 @@
     });
 </script>
 </body>
-  </html>
+                </html>
