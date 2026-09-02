@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📝 EnglishMaster · MCQ Learning PWA</title>
+    <title>📝 EnglishMaster · Live Feedback MCQ</title>
     <style>
         * {
             box-sizing: border-box;
@@ -74,19 +74,6 @@
             position: relative;
             overflow: hidden;
         }
-        .menu-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,200,87,0.1), transparent);
-            transition: transform 0.5s;
-        }
-        .menu-card:hover::before {
-            transform: translate(50%, 50%);
-        }
         .menu-card:hover {
             border-color: #2a4a7f;
             background: #f6faff;
@@ -105,12 +92,6 @@
             font-size: 0.9rem;
             color: #4a5f7a;
             line-height: 1.6;
-        }
-        .quiz-area {
-            background: #ffffff;
-            border-radius: 24px;
-            border: 1px solid #dce5f0;
-            overflow: hidden;
         }
         .quiz-header {
             display: flex;
@@ -139,6 +120,24 @@
             color: white;
             transform: scale(1.05);
         }
+        .live-stats {
+            background: linear-gradient(135deg, #ffc857, #ff9f1c);
+            padding: 10px 20px;
+            border-radius: 0 0 20px 20px;
+            display: flex;
+            justify-content: space-around;
+            font-weight: 700;
+            color: #1a2f5a;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .live-stats span {
+            background: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
         .section-header {
             background: #eef3fb;
             padding: 14px 24px;
@@ -147,9 +146,6 @@
             color: #1a2f5a;
             border-left: 6px solid #2a4a7f;
             border-bottom: 2px solid #dde5f0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
         .passage-box {
             background: #f9fafc;
@@ -161,17 +157,12 @@
             line-height: 1.8;
             color: #1b2b4a;
             font-style: italic;
-            position: relative;
         }
         .passage-box h4 {
             font-style: normal;
             font-weight: 700;
             color: #1a2f5a;
             margin-bottom: 8px;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
         .clickable-word {
             color: #2a4a7f;
@@ -179,12 +170,10 @@
             border-bottom: 2px dotted #ffc857;
             cursor: pointer;
             transition: all 0.2s;
-            position: relative;
             padding: 0 2px;
         }
         .clickable-word:hover {
             background: #fff7e0;
-            border-bottom-color: #ffc857;
         }
         .word-tooltip {
             position: fixed;
@@ -249,9 +238,8 @@
             font-weight: 500;
             color: #1b2b4a;
             position: relative;
-            overflow: hidden;
         }
-        .option-item:hover {
+        .option-item:hover:not(.disabled) {
             border-color: #2a4a7f;
             background: #f0f5ff;
             transform: scale(1.01);
@@ -316,7 +304,6 @@
         }
         .answer-display {
             margin-top: 10px;
-            display: none;
             background: linear-gradient(135deg, #fff7e0, #fff3cd);
             border-radius: 12px;
             padding: 12px 16px;
@@ -338,13 +325,10 @@
             cursor: pointer;
             font-size: 0.95rem;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
         }
         .btn-primary {
             background: linear-gradient(135deg, #1a2f5a, #2a4a7f);
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(26,47,90,0.3);
         }
         .btn-primary:hover {
@@ -370,7 +354,6 @@
             font-size: 1.3rem;
             font-weight: 700;
             animation: slideUp 0.5s ease;
-            box-shadow: 0 10px 30px rgba(26,47,90,0.3);
         }
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -402,7 +385,6 @@
             font-size: 1rem;
             box-shadow: 0 4px 15px rgba(255,107,53,0.4);
             z-index: 1000;
-            animation: pulse 0.5s ease;
             display: none;
         }
         .streak-indicator.show {
@@ -413,25 +395,18 @@
             from { transform: scale(0.8); }
             to { transform: scale(1); }
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
         .progress-bar-container {
             background: #eef3fa;
             border-radius: 20px;
             height: 10px;
             margin: 15px 28px;
             overflow: hidden;
-            position: relative;
         }
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, #ffc857, #ff9f1c);
             border-radius: 20px;
             transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
         }
         .progress-text {
             text-align: center;
@@ -440,7 +415,7 @@
             margin-bottom: 15px;
         }
 
-        /* ===== FLOWER SHOWER ANIMATION ===== */
+        /* Animation elements */
         .flower {
             position: fixed;
             font-size: 24px;
@@ -449,17 +424,9 @@
             animation: flowerFall 2.5s ease-in forwards;
         }
         @keyframes flowerFall {
-            0% { 
-                transform: translateY(-10px) rotate(0deg); 
-                opacity: 1; 
-            }
-            100% { 
-                transform: translateY(105vh) rotate(360deg); 
-                opacity: 0; 
-            }
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
-
-        /* ===== MISSILE DROP ANIMATION ===== */
         .missile {
             position: fixed;
             font-size: 40px;
@@ -468,21 +435,10 @@
             animation: missileDrop 1.2s ease-in forwards;
         }
         @keyframes missileDrop {
-            0% { 
-                transform: translateY(-100vh) rotate(0deg); 
-                opacity: 1; 
-            }
-            80% { 
-                transform: translateY(60vh) rotate(45deg); 
-                opacity: 1; 
-            }
-            100% { 
-                transform: translateY(100vh) rotate(45deg) scale(1.5); 
-                opacity: 0; 
-            }
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            80% { transform: translateY(60vh) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(45deg) scale(1.5); opacity: 0; }
         }
-
-        /* Explosion effect after missile */
         .explosion {
             position: fixed;
             font-size: 60px;
@@ -509,32 +465,32 @@
             <div class="menu-card" data-set="1">
                 <h3>📘 Set 1</h3>
                 <p>Prose · Verse · Rapid Reader · Grammar · Unseen</p>
-                <p style="font-size:0.85rem; color:#335;">40 questions · Words: 22+</p>
+                <p style="font-size:0.85rem; color:#335;">40 questions</p>
             </div>
             <div class="menu-card" data-set="2">
                 <h3>📗 Set 2</h3>
                 <p>Prose · Verse · Rapid Reader · Grammar · Unseen</p>
-                <p style="font-size:0.85rem; color:#335;">40 questions · Words: 25+</p>
+                <p style="font-size:0.85rem; color:#335;">40 questions</p>
             </div>
             <div class="menu-card" data-set="3">
                 <h3>📙 Set 3</h3>
                 <p>Prose · Verse · Rapid Reader · Grammar · Unseen</p>
-                <p style="font-size:0.85rem; color:#335;">40 questions · Words: 18+</p>
+                <p style="font-size:0.85rem; color:#335;">40 questions</p>
             </div>
             <div class="menu-card" data-set="4">
                 <h3>📕 Set 4</h3>
                 <p>Prose · Verse · Rapid Reader · Grammar · Unseen</p>
-                <p style="font-size:0.85rem; color:#335;">40 questions · Words: 20+</p>
+                <p style="font-size:0.85rem; color:#335;">40 questions</p>
             </div>
         </div>
         <div style="background:linear-gradient(135deg,#f7fafe,#eef3fa); border-radius:20px; padding:20px; border:2px solid #dce5f0;">
-            <p style="font-weight:500; margin-bottom:12px;">💡 <b>Features:</b></p>
+            <p style="font-weight:500; margin-bottom:12px;">💡 <b>Live Feedback Mode:</b></p>
             <ul style="list-style-type: none; line-height: 2;">
-                <li>✅ <b>Clickable words</b> in passages - hover/tap for meanings</li>
                 <li>🌸 <b>Flower shower</b> for correct answers</li>
                 <li>🚀 <b>Missile drop</b> for wrong answers</li>
-                <li>📊 <b>Progress bar</b> & score celebration</li>
-                <li>🔤 <b>50%+ word meanings</b> for vocabulary building</li>
+                <li>✅ <b>Instant answer reveal</b> after each click</li>
+                <li>📊 <b>Live progress tracking</b></li>
+                <li>🔤 <b>Clickable word meanings</b></li>
             </ul>
         </div>
     </div>
@@ -543,13 +499,19 @@
             <span class="quiz-title" id="quizTitle">Model Set</span>
             <button class="exit-btn" id="exitQuizBtn">← Main Menu</button>
         </div>
+        <div class="live-stats">
+            <span>📊 Answered: <span id="answeredCount">0</span>/40</span>
+            <span>✅ Correct: <span id="correctCount">0</span></span>
+            <span>❌ Wrong: <span id="wrongCount">0</span></span>
+            <span>🔥 Streak: <span id="streakCount">0</span></span>
+        </div>
         <div class="progress-bar-container">
             <div class="progress-bar" id="progressBar" style="width:0%"></div>
         </div>
         <div class="progress-text" id="progressText">0 / 40 answered</div>
         <div id="quizContent"></div>
     </div>
-    <div class="footer-note">✨ Interactive MCQ · Flower Shower & Missile Drop Animations · Clickable Vocabulary</div>
+    <div class="footer-note">✨ Live Feedback · Flower & Missile Animations · Instant Answer Reveal</div>
 </div>
 
 <!-- Word Tooltip -->
@@ -563,61 +525,61 @@
         return { text, options, correct };
     }
 
-    // ========== WORD DICTIONARY ==========
+    // WORD DICTIONARY
     const wordDict = {
-        "conspired": "secretly planned with others to do something unlawful",
-        "prescription": "a written order for medicine; here, a solution or formula",
-        "immortality": "the ability to live forever",
-        "declared": "announced officially or formally",
-        "refuses": "to say no; to decline",
-        "sentenced": "given a punishment by a court or authority",
+        "conspired": "secretly planned with others",
+        "prescription": "a solution or formula",
+        "immortality": "ability to live forever",
+        "declared": "announced officially",
+        "refuses": "to say no",
+        "sentenced": "given a punishment",
         "representatives": "people chosen to act for others",
-        "inquisitor": "a person who asks questions (often harshly)",
-        "executioner": "a person who carries out death sentences",
-        "pounced": "jumped on suddenly to attack",
+        "inquisitor": "person who asks questions",
+        "executioner": "person who carries out death sentences",
+        "pounced": "jumped on suddenly",
         "loomed": "appeared large and threatening",
-        "calmly": "in a quiet and peaceful way",
-        "freshly": "recently; just now",
-        "united": "joined together as one",
-        "hatred": "intense dislike or hostility",
-        "anxious": "feeling worried or nervous",
-        "epidemic": "widespread occurrence of a disease",
-        "coincides": "happens at the same time",
-        "transformation": "a complete change",
-        "consciousness": "awareness of one's surroundings",
-        "critical": "very important for success",
-        "mediated": "influenced or connected through",
-        "drastic": "extreme and sudden",
+        "calmly": "in a quiet way",
+        "freshly": "recently",
+        "united": "joined together",
+        "hatred": "intense dislike",
+        "anxious": "feeling worried",
+        "epidemic": "widespread occurrence",
+        "coincides": "happens at same time",
+        "transformation": "complete change",
+        "consciousness": "awareness",
+        "critical": "very important",
+        "mediated": "influenced through",
+        "drastic": "extreme",
         "overprotect": "protect too much",
-        "discourse": "conversation or discussion",
+        "discourse": "conversation",
         "safetyism": "excessive focus on safety",
-        "capacities": "abilities to do things",
+        "capacities": "abilities",
         "antifragile": "becomes stronger under stress",
-        "attunes": "adjusts or harmonizes",
-        "resilience": "ability to recover from difficulties",
-        "configures": "sets up or arranges",
-        "condemning": "sending to a bad fate",
-        "opportunity": "favorable time or chance",
+        "attunes": "adjusts",
+        "resilience": "ability to recover",
+        "configures": "sets up",
+        "condemning": "sending to bad fate",
+        "opportunity": "favorable time",
         "fragmentation": "breaking into pieces",
-        "vulnerabilities": "weaknesses or susceptibilities",
-        "contagious": "spreading easily from person to person",
-        "proverb": "a short wise saying",
-        "satisfied": "pleased with what one has",
-        "honest": "truthful and fair",
-        "luxuries": "expensive things not essential",
+        "vulnerabilities": "weaknesses",
+        "contagious": "spreading easily",
+        "proverb": "short wise saying",
+        "satisfied": "pleased",
+        "honest": "truthful",
+        "luxuries": "expensive non-essentials",
         "avoided": "kept away from",
-        "pitiable": "deserving pity; sad",
-        "unfair": "not just or honest",
-        "revenge": "harm done in return for wrong",
-        "polluted": "made impure or corrupt",
-        "prosperity": "success and wealth",
-        "curbed": "restrained or limited",
-        "contribute": "give or add to",
-        "welfare": "well-being and happiness",
-        "self-appointed": "chosen by oneself, not by others"
+        "pitiable": "deserving pity",
+        "unfair": "not just",
+        "revenge": "harm in return",
+        "polluted": "made impure",
+        "prosperity": "success",
+        "curbed": "restrained",
+        "contribute": "give",
+        "welfare": "well-being",
+        "self-appointed": "chosen by oneself"
     };
 
-    // ========== PASSAGES ==========
+    // PASSAGES
     const passage1 = `A wolf and a fox <span class="clickable-word" data-word="conspired">conspired</span> to kill a lot of other animals and store up the meat for future meals. In the name of King Lion they called all the animals together and <span class="clickable-word" data-word="declared">declared</span>, "It is said that there is known throughout the forest a <span class="clickable-word" data-word="prescription">prescription</span> for eternal youth and <span class="clickable-word" data-word="immortality">immortality</span> which was handed down from the past, and it is being kept from us two and King Lion. On behalf of King Lion we order you to tell it. Anyone who <span class="clickable-word" data-word="refuses">refuses</span> will be <span class="clickable-word" data-word="sentenced">sentenced</span> to death." As <span class="clickable-word" data-word="self-appointed">self-appointed</span> <span class="clickable-word" data-word="representatives">representatives</span> of the king, the fox acted as the <span class="clickable-word" data-word="inquisitor">inquisitor</span>, the wolf as <span class="clickable-word" data-word="executioner">executioner</span>. The deer was the first to be called up, and of course, it knew of no such prescription. So the fox declared, "This deer is sentenced to death", and the wolf <span class="clickable-word" data-word="pounced">pounced</span> on it. The deer was followed by a goat and a pheasant and they were killed in the same way. Who would be next? Terror <span class="clickable-word" data-word="loomed">loomed</span> large in the silent forest. Then a small white rabbit hopped in front of the fox and the wolf and said <span class="clickable-word" data-word="calmly">calmly</span>, "I know the prescription." Of course, the wolf and the fox knew there was no such thing. "What did you say?" "Out with it then." "The prescription is that King Lion must eat the heart of the fox and lungs of the wolf <span class="clickable-word" data-word="freshly">freshly</span> cut from their bodies." Then the rabbit turned to the other animals and shouted, "Brothers, it's time to act! Cut out their hearts and lungs and offer them to the king." The other animals, <span class="clickable-word" data-word="united">united</span> by their common <span class="clickable-word" data-word="hatred">hatred</span> of the fox and wolf, <span class="clickable-word" data-word="pounced">pounced</span> on them and killed them in no time.`;
 
     const passage2 = `Kids are not alright, argues "The Anxious Generation: How the Great Rewiring of Childhood Is Causing an Epidemic of Mental Illness" by Jonathan Haidt. Between 2010 and 2015, rates of <span class="clickable-word" data-word="anxious">anxiety</span> and depression went up sharply for adolescents in many countries, while older cohorts were unaffected. Only one-third of college students reported feeling anxious less than half the time or never. Self-harm and suicide rates also rose. That <span class="clickable-word" data-word="coincides">coincides</span> with the smartphone era. Gen Z is the first to grow up with a portal in their pocket, watching the shiny lives of their friends and distant influencers. Being 'forever elsewhere' is a profound <span class="clickable-word" data-word="transformation">transformation</span> of human <span class="clickable-word" data-word="consciousness">consciousness</span> and relationships, the book argues. Pre-puberty is a <span class="clickable-word" data-word="critical">critical</span> learning period for language and culture, and during this period, Gen Z's identities, emotions, selfhood and relationships have been <span class="clickable-word" data-word="mediated">mediated</span> through phones. But this <span class="clickable-word" data-word="drastic">drastic</span> rewiring of childhood is also about how adults began to <span class="clickable-word" data-word="overprotect">overprotect</span> children. Unsupervised play declined around the same time that personal computers took off, in the late 1980s. A wide <span class="clickable-word" data-word="discourse">discourse</span> of stranger danger and '<span class="clickable-word" data-word="safetyism">safetyism</span>' took over parenting and schooling. This blocked children's experience in basic ways. Humans have a long childhood to acquire certain <span class="clickable-word" data-word="capacities">capacities</span>. Kids need to take risks and chase thrills, to be <span class="clickable-word" data-word="antifragile">antifragile</span>, learn to manage in the physical world. Face-to-face and shoulder-to-shoulder interaction and play <span class="clickable-word" data-word="attunes">attunes</span> them to others. They actually need some acute stress to build emotional <span class="clickable-word" data-word="resilience">resilience</span>. Parents struggle too. They can see the harms of social media and online games, but the world has <span class="clickable-word" data-word="configures">configured</span> itself so that anyone who resists screentime is <span class="clickable-word" data-word="condemning">condemning</span> their child to social isolation. Think of the <span class="clickable-word" data-word="opportunity">opportunity</span> costs of that time whiled away, from social and sleep deprivation to attention <span class="clickable-word" data-word="fragmentation">fragmentation</span> and addiction. Internet adulthood starts at the age of 13: that's when digital platforms allow you to start an account. In teen years, reward centres of the brain are active, but the frontal cortex that determines self-control does not develop till one's mid-20s. So, these kids are insecure, easily swayed by social validation. One could argue that this anxiety and depression is caused by objectively bad conditions this generation faces—climate change, wars, political instability, and a precarious future. But previous generations have not been laid low by external situations, they have been energised as if to take collective action. Today, world events are pumped through their phones, not as news but emotionally loaded stories, which have a different impact, as emotions are <span class="clickable-word" data-word="contagious">contagious</span>. What can be done about this? Govt. and tech companies have to get their act together, recognising the harms and <span class="clickable-word" data-word="vulnerabilities">vulnerabilities</span> of teens. At the least, the minimum age to get on these platforms should be raised to 16 and smartphones should not be given to children before high school. Phone-free schools, plenty of play and childhood independence are essential.`;
@@ -625,6 +587,9 @@
     const passage3 = `There is a <span class="clickable-word" data-word="proverb">proverb</span> 'cut your coat according to your cloth'. We should be <span class="clickable-word" data-word="satisfied">satisfied</span> with what we earn in an <span class="clickable-word" data-word="honest">honest</span> way. In a poor country like ours <span class="clickable-word" data-word="luxuries">luxuries</span> of all kinds should be <span class="clickable-word" data-word="avoided">avoided</span>. The rich should not forget the <span class="clickable-word" data-word="pitiable">pitiable</span> condition of the common people. Some people earn money in the most <span class="clickable-word" data-word="unfair">unfair</span> way. They spend much more than what they should. They forget that days are not far off when the poor and the distressed will take <span class="clickable-word" data-word="revenge">revenge</span>. The educated people should be honest. If they are <span class="clickable-word" data-word="polluted">polluted</span>, we shall lose all hopes for peace and <span class="clickable-word" data-word="prosperity">prosperity</span>. In a poor country like ours luxury of all kinds regarding rights should be <span class="clickable-word" data-word="curbed">curbed</span>. We should live within our means and <span class="clickable-word" data-word="contribute">contribute</span> to the <span class="clickable-word" data-word="welfare">welfare</span> of society.`;
 
     const passage4 = `A wolf and a fox <span class="clickable-word" data-word="conspired">conspired</span> to kill a lot of other animals and store up the meat for future meals. In the name of King Lion they called all the animals together and declared, "It is said that there is known throughout the forest a <span class="clickable-word" data-word="prescription">prescription</span> for eternal youth and <span class="clickable-word" data-word="immortality">immortality</span> which was handed down from the past, and it is being kept from us two and King Lion. On behalf of King Lion we order you to tell it. Anyone who <span class="clickable-word" data-word="refuses">refuses</span> will be sentenced to death." As <span class="clickable-word" data-word="self-appointed">self-appointed</span> representatives of the king, the fox acted as the <span class="clickable-word" data-word="inquisitor">inquisitor</span>, the wolf as <span class="clickable-word" data-word="executioner">executioner</span>. The deer was the first to be called up, and of course, it knew of no such prescription. So the fox declared, "This deer is sentenced to death", and the wolf <span class="clickable-word" data-word="pounced">pounced</span> on it. The deer was followed by a goat and a pheasant and they were killed in the same way. Who would be next? Terror <span class="clickable-word" data-word="loomed">loomed</span> large in the silent forest. Then a small white rabbit hopped in front of the fox and the wolf and said <span class="clickable-word" data-word="calmly">calmly</span>, "I know the prescription." Of course, the wolf and the fox knew there was no such thing. "What did you say?" "Out with it then." "The prescription is that King Lion must eat the heart of the fox and lungs of the wolf freshly cut from their bodies." Then the rabbit turned to the other animals and shouted, "Brothers, it's time to act! Cut out their hearts and lungs and offer them to the king." The other animals, <span class="clickable-word" data-word="united">united</span> by their common <span class="clickable-word" data-word="hatred">hatred</span> of the fox and wolf, <span class="clickable-word" data-word="pounced">pounced</span> on them and killed them in no time.`;
+
+    // QUESTION SETS (I'll reuse all the question data from previous version)
+    // ... [all question arrays remain the same as before]
 
     // ========== SET 1 ==========
     const set1Prose = [
@@ -678,7 +643,9 @@
         q("True/False: (i) deer lacked presence of mind (ii) pheasant acted differently (iii) all animals had repulsion for fox/wolf (iv) Lion knew nothing", ["T,F,T,T","F,F,F,T","T,T,T,T","F,F,F,F"], 0)
     ];
 
-    // ========== SET 2 ==========
+    // [All other sets remain same - I'll include compact versions]
+
+    // ========== SET 2 (compact - reusing same structure) ==========
     const set2Prose = [
         q("Choose the correct order of events: (i) left place (ii) drinking/gambling (iii) threw body into well (iv) stabbed Guru Nayak", ["(iv),(ii),(i),(iii)","(ii),(iv),(iii),(i)","(i),(iii),(iv),(ii)","(iii),(i),(ii),(iv)"], 1),
         q("What advice did astrologer give to Guru Nayak?", ["take next train and return to village","move southward where he would find perpetrator","forget everything and start life anew","get horoscope to see if he would face other dangers"], 2),
@@ -730,7 +697,7 @@
         q("The remedy to this problem is—", ["Minimum age to get on social platforms should be raised to 16","Parents should always monitor","Children should practise meditation","No children should be allowed to use mobile phones till 18"], 0)
     ];
 
-    // ========== SET 3 ==========
+    // ========== SET 3 (compact) ==========
     const set3Prose = [
         q("The number of cowrie shells that the astrologer had in possession was—", ["nine","twelve","six","sixteen"], 1),
         q("The astrologer caught the glimpses of the stranger's face by the—", ["street light","green flare","light of cars","matchstick"], 1),
@@ -782,7 +749,7 @@
         q("We lose all hopes for peace and prosperity when—", ["The educated people are polluted","The rich people are polluted","We earn money in unfair way","The poor will rise up"], 0)
     ];
 
-    // ========== SET 4 ==========
+    // ========== SET 4 (compact) ==========
     const set4Prose = [
         q("Assertion: ? Reason: I am very busy.", ["There are moments when art almost gains the dignity of manual labour","I will be back in a moment","Don't run away","But you must not chatter"], 0),
         q("Correct order: (i) Hughie had every accomplishment (ii) popular with men/women (iii) father bequeathed (iv) hung first over looking glass", ["(i),(ii),(iii),(iv)","(iii),(ii),(i),(iv)","(ii),(i),(iii),(iv)","(ii),(ii),(iii),(i)"], 2),
@@ -857,8 +824,9 @@
     let answers = {};
     let submitted = false;
     let currentStreak = 0;
-    let bestStreak = 0;
     let answeredCount = 0;
+    let correctCount = 0;
+    let wrongCount = 0;
 
     const mainMenu = document.getElementById('mainMenu');
     const quizContainer = document.getElementById('quizContainer');
@@ -867,10 +835,10 @@
     const exitBtn = document.getElementById('exitQuizBtn');
     const progressBar = document.getElementById('progressBar');
     const progressText = document.getElementById('progressText');
-    const streakIndicator = document.getElementById('streakIndicator');
     const wordTooltip = document.getElementById('wordTooltip');
+    const streakIndicator = document.getElementById('streakIndicator');
 
-    // Tooltip for clickable words
+    // Tooltip
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('clickable-word')) {
             const word = e.target.dataset.word;
@@ -884,24 +852,23 @@
         }
     });
 
-    // ===== FLOWER SHOWER =====
+    // ANIMATIONS
     function flowerShower() {
         const flowers = ['🌸', '🌺', '🌻', '🌼', '💮', '🏵️', '🌹', '🌷'];
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 15; i++) {
             setTimeout(() => {
                 const flower = document.createElement('div');
                 flower.className = 'flower';
                 flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
                 flower.style.left = Math.random() * 100 + 'vw';
                 flower.style.top = '-10px';
-                flower.style.fontSize = (20 + Math.random() * 25) + 'px';
+                flower.style.fontSize = (18 + Math.random() * 22) + 'px';
                 document.body.appendChild(flower);
                 setTimeout(() => flower.remove(), 2500);
-            }, Math.random() * 150);
+            }, Math.random() * 100);
         }
     }
 
-    // ===== MISSILE DROP =====
     function missileDrop() {
         const missile = document.createElement('div');
         missile.className = 'missile';
@@ -910,7 +877,6 @@
         missile.style.top = '-100px';
         document.body.appendChild(missile);
         
-        // Explosion after missile lands
         setTimeout(() => {
             const explosion = document.createElement('div');
             explosion.className = 'explosion';
@@ -925,6 +891,23 @@
         }, 1100);
     }
 
+    function updateStats() {
+        document.getElementById('answeredCount').textContent = answeredCount;
+        document.getElementById('correctCount').textContent = correctCount;
+        document.getElementById('wrongCount').textContent = wrongCount;
+        document.getElementById('streakCount').textContent = currentStreak;
+        
+        progressBar.style.width = (answeredCount / 40 * 100) + '%';
+        progressText.innerText = `${answeredCount} / 40 answered`;
+        
+        if (currentStreak >= 2) {
+            streakIndicator.textContent = `🔥 ${currentStreak}`;
+            streakIndicator.classList.add('show');
+        } else {
+            streakIndicator.classList.remove('show');
+        }
+    }
+
     function renderQuiz(setId) {
         currentSet = setId;
         const set = allSets[setId];
@@ -932,13 +915,14 @@
         submitted = false;
         currentStreak = 0;
         answeredCount = 0;
-        streakIndicator.classList.remove('show');
+        correctCount = 0;
+        wrongCount = 0;
         
         quizTitle.innerText = set.title + " (40 questions)";
         mainMenu.style.display = 'none';
         quizContainer.style.display = 'block';
-        progressBar.style.width = '0%';
-        progressText.innerText = '0 / 40 answered';
+        
+        updateStats();
 
         let html = '';
         let globalIdx = 0;
@@ -959,14 +943,13 @@
                 html += `<div class="question-block" id="qblock-${idx}">
                     <div class="q-text">${idx+1}. ${qObj.text}</div>
                     <div class="options-list" id="opts-${idx}">${opts}</div>
-                    <div class="answer-display" id="ans-${idx}"></div>
+                    <div class="answer-display" id="ans-${idx}" style="display:none;"></div>
                 </div>`;
                 globalIdx++;
             });
         });
         
         html += `<div class="action-bar">
-            <button class="btn btn-primary" onclick="submitQuiz()">✅ Check & Marks</button>
             <button class="btn btn-outline" onclick="resetCurrent()">↺ Reset</button>
         </div>`;
         
@@ -983,80 +966,70 @@
     }
 
     window.selectAnswer = function(qidx, optIdx) {
-        if (submitted) return;
+        if (answers[qidx] !== undefined) return; // Already answered
         
-        document.querySelectorAll(`#opts-${qidx} .option-item`).forEach(el => el.classList.remove('selected'));
-        
-        answers[qidx] = optIdx;
-        document.querySelectorAll(`#opts-${qidx} .option-item`).forEach(el => {
-            if (parseInt(el.dataset.opt) === optIdx) {
-                el.classList.add('selected');
-                el.style.transform = 'scale(1.03)';
-                setTimeout(() => el.style.transform = '', 200);
-            }
-        });
-        
-        const nextBlock = document.getElementById(`qblock-${qidx + 1}`);
-        if (nextBlock && qidx < 39) {
-            setTimeout(() => nextBlock.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
-        }
-    };
-
-    window.resetCurrent = function() {
-        answers = {};
-        submitted = false;
-        currentStreak = 0;
-        answeredCount = 0;
-        streakIndicator.classList.remove('show');
-        renderQuiz(currentSet);
-    };
-
-    window.submitQuiz = function() {
         const flatQ = [];
         allSets[currentSet].sections.forEach(sec => {
             sec.questions.forEach(q => flatQ.push(q));
         });
         
-        let score = 0;
+        const qObj = flatQ[qidx];
+        const correct = qObj.correct;
+        const optsList = document.getElementById(`opts-${qidx}`);
+        const optionItems = optsList.querySelectorAll('.option-item');
+        const ansDiv = document.getElementById(`ans-${qidx}`);
         
-        for (let idx = 0; idx < 40; idx++) {
-            const qObj = flatQ[idx];
-            const ansDiv = document.getElementById(`ans-${idx}`);
-            const optsList = document.getElementById(`opts-${idx}`);
-            const correct = qObj.correct;
-            const selected = answers[idx];
-            
-            ansDiv.style.display = 'block';
+        // Mark selected
+        answers[qidx] = optIdx;
+        answeredCount++;
+        
+        // Highlight correct and wrong
+        optionItems[correct].classList.add('correct-answer');
+        
+        if (optIdx === correct) {
+            // CORRECT
+            correctCount++;
+            currentStreak++;
+            flowerShower(); // 🌸
+            ansDiv.innerHTML = `<span style="font-weight:700;color:#1f7f4c;">✅ Correct!</span>`;
+        } else {
+            // WRONG
+            wrongCount++;
+            currentStreak = 0;
+            optionItems[optIdx].classList.add('wrong-answer');
+            missileDrop(); // 🚀
             const correctText = `${String.fromCharCode(65+correct)}. ${qObj.options[correct]}`;
-            
-            const optionItems = optsList.querySelectorAll('.option-item');
-            optionItems[correct].classList.add('correct-answer');
-            
-            if (selected === null) {
-                ansDiv.innerHTML = `<span style="font-weight:700;color:#b02a2a;">❌ No answer</span><br>✅ Correct: ${correctText}`;
-            } else if (selected === correct) {
-                score++;
-                ansDiv.innerHTML = `<span style="font-weight:700;color:#1f7f4c;">✔ Correct (${String.fromCharCode(65+selected)})</span>`;
-                flowerShower(); // 🌸 Flower shower for correct
-            } else {
-                optionItems[selected].classList.add('wrong-answer');
-                ansDiv.innerHTML = `<span style="font-weight:700;color:#b02a2a;">✘ Wrong, you chose ${String.fromCharCode(65+selected)}</span><br>✅ Correct: ${correctText}`;
-                missileDrop(); // 🚀 Missile drop for wrong
-            }
-            
-            optionItems.forEach(el => el.classList.add('disabled'));
+            ansDiv.innerHTML = `<span style="font-weight:700;color:#b02a2a;">❌ Wrong</span><br>✅ Correct answer: ${correctText}`;
         }
         
-        submitted = true;
+        ansDiv.style.display = 'block';
+        optionItems.forEach(el => el.classList.add('disabled'));
         
-        progressBar.style.width = '100%';
-        progressText.innerText = '40 / 40 answered';
+        updateStats();
+        
+        // Auto-scroll to next question
+        const nextBlock = document.getElementById(`qblock-${qidx + 1}`);
+        if (nextBlock && qidx < 39) {
+            setTimeout(() => nextBlock.scrollIntoView({ behavior: 'smooth', block: 'center' }), 400);
+        }
+        
+        // Check if all answered
+        if (answeredCount === 40) {
+            setTimeout(() => showFinalScore(), 1000);
+        }
+    };
+
+    function showFinalScore() {
+        const flatQ = [];
+        allSets[currentSet].sections.forEach(sec => {
+            sec.questions.forEach(q => flatQ.push(q));
+        });
         
         const scoreBanner = document.createElement('div');
         scoreBanner.id = 'scoreBanner';
         scoreBanner.className = 'score-banner';
         
-        const percentage = Math.round((score / 40) * 100);
+        const percentage = Math.round((correctCount / 40) * 100);
         let message = '';
         let emoji = '';
         
@@ -1073,34 +1046,39 @@
         
         scoreBanner.innerHTML = `
             <div style="font-size:2rem; margin-bottom:10px;">${emoji}</div>
-            <div>Score: ${score} / 40 (${percentage}%)</div>
+            <div>Score: ${correctCount} / 40 (${percentage}%)</div>
             <div style="font-size:1rem; margin-top:8px; font-weight:400;">${message}</div>
         `;
         
         quizContent.appendChild(scoreBanner);
         
-        animateScore(scoreBanner.querySelector('div:nth-child(2)'), score, percentage);
-        
-        streakIndicator.classList.remove('show');
-    };
-
-    function animateScore(element, finalScore, percentage) {
-        let currentScore = 0;
+        // Animate score counting
+        const scoreElement = scoreBanner.querySelector('div:nth-child(2)');
+        let current = 0;
         const interval = setInterval(() => {
-            currentScore++;
-            element.textContent = `Score: ${currentScore} / 40 (${Math.round((currentScore / 40) * 100)}%)`;
-            if (currentScore >= finalScore) {
+            current++;
+            scoreElement.textContent = `Score: ${current} / 40 (${Math.round((current / 40) * 100)}%)`;
+            if (current >= correctCount) {
                 clearInterval(interval);
             }
         }, 50);
     }
+
+    window.resetCurrent = function() {
+        answers = {};
+        submitted = false;
+        currentStreak = 0;
+        answeredCount = 0;
+        correctCount = 0;
+        wrongCount = 0;
+        renderQuiz(currentSet);
+    };
 
     exitBtn.addEventListener('click', () => {
         quizContainer.style.display = 'none';
         mainMenu.style.display = 'block';
         const oldScore = document.getElementById('scoreBanner');
         if (oldScore) oldScore.remove();
-        streakIndicator.classList.remove('show');
         wordTooltip.classList.remove('show');
     });
 
